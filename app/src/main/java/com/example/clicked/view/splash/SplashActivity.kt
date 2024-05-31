@@ -1,10 +1,11 @@
-package com.example.clicked.view
+package com.example.clicked.view.splash
 
 import android.content.Intent
 import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.clicked.R
+import com.example.clicked.view.home.HomeActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay

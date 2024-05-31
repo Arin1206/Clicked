@@ -3,4 +3,10 @@
     <string name="Welcometext">Aplikasi Berita Harian tebaru Clicked</string>
     <string name="logintext">Login</string>
     <string name="registertext">Register</string>
+    <string name="email">Email</string>
+    <string name="email_placeholder">Masukkan Email Anda</string>
+    <string name="password_placeholder">Masukkan Password Anda</string>
+    <string name="password">Password</string>
+    <string name="belumpunyaakun">Belum Punya Akun ?</string>
+    <string name="registernow">Daftar Sekarang</string>
 </resources>

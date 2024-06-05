@@ -1,4 +1,4 @@
-package com.example.clicked.view.home
+package com.example.clicked.view.welcome
 
 import android.content.Intent
 import android.os.Bundle
@@ -8,20 +8,35 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.example.clicked.R
 import com.example.clicked.view.login.LoginActivity
+import com.example.clicked.view.main.MainActivity
 import com.example.clicked.view.register.RegisterActivity
+import com.google.firebase.auth.FirebaseAuth
 
-class HomeActivity : AppCompatActivity() {
+class WelcomeActivity : AppCompatActivity() {
+    private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_home)
+        setContentView(R.layout.activity_welcome)
+
+        // Initialize Firebase Auth
+        firebaseAuth = FirebaseAuth.getInstance()
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
 
+        // Check if user is logged in
+        if (firebaseAuth.currentUser != null) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+            finish() // Ensure the WelcomeActivity is closed
+        }
     }
+
     fun onButtonLoginClick(view: android.view.View) {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)

@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".view.home.HomeActivity">
+    tools:context=".view.welcome.WelcomeActivity">
 
     <ScrollView
         android:id="@+id/scrollView"
@@ -93,7 +93,7 @@
                 android:layout_marginEnd="70dp"
                 android:paddingTop="40dp"
                 android:paddingBottom="40dp"
-                android:src="@drawable/circle" />
+                android:src="@drawable/circle"/>
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

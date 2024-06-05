@@ -5,7 +5,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import androidx.appcompat.app.AppCompatActivity
 import com.example.clicked.R
-import com.example.clicked.view.home.HomeActivity
+import com.example.clicked.view.welcome.WelcomeActivity
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
@@ -25,7 +25,7 @@ class SplashActivity : AppCompatActivity() { // Use consistent naming
 
         scope.launch { // Use coroutine for non-UI tasks
             delay(3000L) // Delay for 3 seconds
-            val intent = Intent(this@SplashActivity, HomeActivity::class.java)
+            val intent = Intent(this@SplashActivity, WelcomeActivity::class.java)
             startActivity(intent)
             finish()
         }

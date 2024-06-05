@@ -150,6 +150,7 @@
                 android:layout_marginBottom="20dp"
                 android:textSize="21sp"
                 android:fontFamily="@font/intereb"
+                android:textColor="@color/aquamarine"
                 android:text="@string/registernow"
                 android:onClick="onRegisterClick"/>
 

@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "440052356586",
+    "project_id": "clicked-eec64",
+    "storage_bucket": "clicked-eec64.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:440052356586:android:bbd99bf1de58e3f5774e93",
+        "android_client_info": {
+          "package_name": "com.example.clicked"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBVtBYp7ZGgSJNpaCmVJoVwPPZP17pnZg8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

@@ -63,4 +63,11 @@ dependencies {
     implementation("com.google.firebase:firebase-analytics")
 
     implementation("com.squareup.retrofit2:converter-gson:2.9.0")
+
+    //circle image
+    implementation("de.hdodenhof:circleimageview:3.1.0")
+
+    //glide
+    implementation("com.github.bumptech.glide:glide:4.15.0")
+    annotationProcessor("com.github.bumptech.glide:compiler:4.15.0")
 }

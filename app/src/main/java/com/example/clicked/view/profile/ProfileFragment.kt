@@ -1,60 +1,75 @@
 package com.example.clicked.view.profile
 
+import android.app.AlertDialog
+import android.content.ContentValues
+import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import com.bumptech.glide.Glide
 import com.example.clicked.R
+import com.example.clicked.databinding.FragmentProfileBinding
+import com.example.clicked.databinding.FragmentSettingBinding
+import com.example.clicked.view.common.BaseFragment
+import com.example.clicked.view.welcome.WelcomeActivity
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
 
-/**
- * A simple [Fragment] subclass.
- * Use the [ProfileFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class ProfileFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate)  {
+    private lateinit var firebaseAuth: FirebaseAuth
+    override fun setupUI() {
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_profile, container, false)
+
+    override fun setupListeners() {
+
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment ProfileFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            ProfileFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
+
+    override fun setupObservers() {
+        fetchDataFromFirebase()
+    }
+
+    private fun fetchDataFromFirebase() {
+        binding.loadingProgressBar.visibility = View.VISIBLE // Show ProgressBar
+        // Mengambil data dari Firestore
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        currentUser?.let { user ->
+            val userId = user.uid
+            val db = FirebaseFirestore.getInstance()
+            val userRef = db.collection("users").document(userId)
+            userRef.get().addOnSuccessListener { document ->
+                if (document != null && document.exists()) {
+                    val name = document.getString("name")
+                    val email = document.getString("email")
+                    val address = document.getString("address")
+                    val imageUrl = document.getString("fileUrl") // Ambil URL gambar dari Firestore
+
+                    // Tampilkan data di UI
+                    binding.nameprof.text = name
+                    binding.emailprof.text = email
+                    binding.alamatprof.text = address
+
+                    // Tampilkan gambar di ImageView jika URL gambar tersedia
+                    imageUrl?.let {
+                        Glide.with(requireContext())
+                            .load(it)
+                            .into(binding.imageprofile2)
+                    }
+                    binding.loadingProgressBar.visibility = View.GONE // Hide ProgressBar after loading data
+                } else {
+                    Log.d(ContentValues.TAG, "Document does not exist")
+                    binding.loadingProgressBar.visibility = View.GONE // Hide ProgressBar if document does not exist
                 }
+            }.addOnFailureListener { exception ->
+                Log.d(ContentValues.TAG, "Error getting document: $exception")
+                binding.loadingProgressBar.visibility = View.GONE // Hide ProgressBar on failure
             }
+        }
     }
 }

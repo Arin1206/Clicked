@@ -7,28 +7,147 @@
     tools:context=".view.setting.SettingFragment">
 
 
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:layout_marginTop="20dp">
+            android:orientation="vertical">
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/setting"
+                android:textAlignment="center"
+                android:textColor="@color/aquamarine"
+                android:textSize="34sp"
+                android:paddingVertical="10dp"
+                >
 
+            </TextView>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="2dp"
+                android:background="@color/aquamarine"/>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
 
-            <Button
-                android:id="@+id/submitlogout"
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/imageprofile"
+                    android:layout_width="120dp"
+                    android:layout_height="120dp"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:layout_marginHorizontal="20dp"
+                    app:civ_border_width="3dp"
+                    app:civ_border_color="@color/black"
+                    tools:srcCompat="@tools:sample/avatars" />
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:orientation="vertical">
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:id="@+id/nameprofile"
+                        android:layout_height="wrap_content"
+                        android:text="@string/setting"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:textSize="20sp"
+                        >
+                    </TextView>
+                    <TextView
+                        android:id="@+id/emailprofile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/setting"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/aquamarine"
+                        android:textSize="16sp"
+                        >
+                    </TextView>
+                    <TextView
+                        android:id="@+id/alamatprofile"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:text="@string/setting"
+                        android:textAlignment="textStart"
+                        android:textColor="@color/black"
+                        android:textSize="16sp"
+                        >
+                    </TextView>
+                </LinearLayout>
+            </LinearLayout>
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                app:cardCornerRadius="20dp"
+                android:layout_marginHorizontal="30dp"
+                android:backgroundTint="@color/white"
+                android:layout_marginBottom="30dp"
+                android:layout_height="wrap_content">
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginBottom="10dp"
+                    android:outlineSpotShadowColor="@color/black"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    >
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/language"
+                        android:textAlignment="textStart"
+                        android:drawablePadding="20dp"
+                        android:textSize="20dp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_marginVertical="10dp"
+                        android:text="@string/language">
+
+                    </TextView>
+                    <TextView
+                        android:id="@+id/submitlogout"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:drawableStart="@drawable/logout"
+                        android:textAlignment="textStart"
+                        android:drawablePadding="20dp"
+                        android:textSize="20sp"
+                        android:textColor="@color/black"
+                        android:textStyle="bold"
+                        android:layout_marginVertical="10dp"
+                        android:text="@string/logout">
+
+                    </TextView>
+
+                </LinearLayout>
+            </androidx.cardview.widget.CardView>
+
+            <ProgressBar
+                android:id="@+id/loadingProgressBar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/logout"
-                android:backgroundTint="@color/aquamarine"
-                android:layout_weight="1"
-                android:layout_marginTop="50dp"
-                android:layout_marginStart="130dp"
-                android:layout_marginEnd="130dp"
-                />
-
+                android:layout_gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:visibility="visible"/>
         </LinearLayout>
+
+
+    </ScrollView>
+
 
 </FrameLayout>

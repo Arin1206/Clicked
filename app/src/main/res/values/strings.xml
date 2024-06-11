@@ -58,4 +58,28 @@
     <string name="upload_file_placeholder">Masukkan Foto Profil</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="home">Home</string>
+    <string name="maps">Maps\n</string>
+    <string name="upload">Upload</string>
+    <string name="setting">Setting</string>
+    <string name="profile">Profile</string>
+    <string name="language">Language</string>
+    <string name="totalpost">23</string>
+    <string name="post">Posts</string>
+    <string name="judulposts">Hasil Pertandingan Indonesia Vs Tanzania</string>
+    <string name="tanggalposts">23 June 2024</string>
+    <string name="isiposts">Timnas Indonesia harus puas dengan hasil imbang saat melawan Timnas Tanzania di laga uji coba. Skuad Garuda melawan Timnas Tanzia</string>
+    <string name="postnews">Post News</string>
+    <string name="Camera">Kamera</string>
+    <string name="gallery">Gallery</string>
+    <string name="paragraf3">Masukkan Paragraf 3 jika ada</string>
+    <string name="sertakanlokasi">Sertakan Lokasi Anda</string>
+    <string name="paragraf1">Masukkan Paragraf 1</string>
+    <string name="paragraf2">Masukkan Paragraf 2</string>
+    <string-array name="spinner_items">
+        <item>Item 1</item>
+        <item>Item 2</item>
+        <item>Item 3</item>
+        <item>Item 4</item>
+    </string-array>
 </resources>

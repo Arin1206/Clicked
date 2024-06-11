@@ -1,60 +1,102 @@
 package com.example.clicked.view.upload
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.Bitmap
+import android.net.Uri
 import android.os.Bundle
-import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
+import android.os.Environment
+import android.provider.MediaStore
 import android.view.View
-import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import com.example.clicked.R
+import com.example.clicked.databinding.FragmentUploadBinding
+import com.example.clicked.view.common.BaseFragment
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.content.FileProvider
+import java.io.File
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [UploadFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
-class UploadFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+class UploadFragment : BaseFragment<FragmentUploadBinding>(FragmentUploadBinding::inflate) {
+    private val REQUEST_IMAGE_CAPTURE = 101
+    private val REQUEST_IMAGE_GALLERY = 102
+    private var currentImagePath: String? = null
+    private var currentImageUri: Uri? = null
+    private val launcherIntentCamera = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+        if (result.resultCode == Activity.RESULT_OK) {
+            val imageBitmap = result.data?.extras?.get("data") as Bitmap?
+            imageBitmap?.let {
+                binding.imagepreview.setImageBitmap(it)
+            }
         }
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater, container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_upload, container, false)
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setupListeners()
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment UploadFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            UploadFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun startCamera() {
+        currentImageUri = getImageUri()
+        currentImageUri?.let {
+            launcherIntentCamera.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, it))
+        }
+    }
+
+    private fun getImageUri(): Uri {
+        val timestamp = System.currentTimeMillis() / 1000
+        val imageFileName = "JPEG_" + timestamp.toString() + "_"
+        val storageDir = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
+        val image = File.createTempFile(imageFileName, ".jpg", storageDir)
+        currentImagePath = image.absolutePath
+        return FileProvider.getUriForFile(requireContext(), "${requireContext().packageName}.fileprovider", image)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_IMAGE_GALLERY && resultCode == Activity.RESULT_OK) {
+            val imageUri = data?.data
+            binding.imagepreview.setImageURI(imageUri)
+            currentImagePath = imageUri.toString()
+        }
+    }
+
+    override fun setupUI() {
+        // Initialize the Spinner
+        val mySpinner = binding.mySpinner
+
+        // Create an ArrayAdapter using the string array and a default spinner layout
+        val adapter = ArrayAdapter.createFromResource(
+            requireContext(),
+            R.array.spinner_items,
+            android.R.layout.simple_spinner_item
+        )
+
+        // Specify the layout to use when the list of choices appears
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+
+        // Apply the adapter to the spinner
+        mySpinner.adapter = adapter
+    }
+
+    override fun setupListeners() {
+        // Setup listener for image preview click
+        binding.camera.setOnClickListener {
+            startCamera()
+        }
+
+        // Setup listener for gallery button
+        binding.gallery.setOnClickListener {
+            openGallery()
+        }
+    }
+
+    private fun openGallery() {
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        galleryIntent.type = "image/*"
+        startActivityForResult(galleryIntent, REQUEST_IMAGE_GALLERY)
+    }
+
+    override fun setupObservers() {
+        // Set up any observers here
     }
 }

@@ -3,12 +3,142 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.profile.ProfileFragment">
 
-    <!-- TODO: Update blank fragment layout -->
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
     <TextView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="@string/hello_blank_fragment" />
+        android:layout_height="wrap_content"
+        android:text="@string/profile"
+        android:textAlignment="center"
+        android:textColor="@color/aquamarine"
+        android:textSize="34sp"
+
+        android:paddingVertical="10dp"
+        >
+
+    </TextView>
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="2dp"
+        android:background="@color/aquamarine"/>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="bottom"
+            android:background="@drawable/bannerprofile"
+            android:orientation="vertical">
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imageprofile2"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
+                android:layout_marginHorizontal="20dp"
+                app:civ_border_width="3dp"
+                app:civ_border_color="@color/black"
+                tools:srcCompat="@tools:sample/avatars" />
+        </LinearLayout>
+        <TextView
+            android:layout_width="match_parent"
+            android:id="@+id/nameprof"
+            android:layout_height="wrap_content"
+            android:text="@string/profile"
+            android:layout_marginTop="20dp"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textStyle="bold"
+            android:textSize="20sp"
+            >
+        </TextView>
+        <TextView
+            android:id="@+id/emailprof"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/profile"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            >
+        </TextView>
+        <TextView
+            android:id="@+id/alamatprof"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/profile"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:layout_marginBottom="20dp"
+            >
+        </TextView>
+        <TextView
+            android:id="@+id/totalpost"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/totalpost"
+            android:textAlignment="center"
+            android:textStyle="bold"
+            android:textColor="@color/aquamarine"
+            android:textSize="24sp"
+            >
+        </TextView>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:text="@string/post"
+            android:textSize="18sp"
+            android:layout_marginBottom="20dp"
+            >
+        </TextView>
+        <ProgressBar
+            android:id="@+id/loadingProgressBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="visible"/>
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/post"
+            android:textAlignment="textStart"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:paddingHorizontal="40dp"
+            android:paddingVertical="10dp"
+            >
+
+        </TextView>
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:layout_marginHorizontal="40dp"
+            android:background="@color/gray"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_stopsession"
+            android:layout_width="match_parent"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="10dp"
+            android:layout_height="wrap_content"
+            tools:listitem="@layout/rv_posts" />
+    </LinearLayout>
+
+
+    </ScrollView>
 
 </FrameLayout>

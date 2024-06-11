@@ -4,4 +4,6 @@
     <color name="white">#FFFFFFFF</color>
     <color name="aquamarine">#4BD4C1</color>
     <color name="gray">#D9D9D9</color>
+    <color name="gray2">#E6E6E6</color>
+    <color name="blue_dark">#322F2F</color>
 </resources>

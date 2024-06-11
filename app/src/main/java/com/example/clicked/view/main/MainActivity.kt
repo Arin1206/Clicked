@@ -1,6 +1,7 @@
 package com.example.clicked.view.main
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -18,18 +19,21 @@ import com.google.firebase.auth.FirebaseAuth
 class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var firebaseAuth: FirebaseAuth
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        enableFullscreen()
+
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        replacefragment(HomeFragment())
+        replaceFragment(HomeFragment())
         firebaseAuth = FirebaseAuth.getInstance()
 //        binding.submitlogout.setOnClickListener{
 //            firebaseAuth.signOut()
@@ -39,26 +43,30 @@ class MainActivity : AppCompatActivity() {
 //        }
         binding.bottomnavigation.setOnItemSelectedListener {
             when(it.itemId){
-                R.id.homepage->replacefragment(HomeFragment())
-                R.id.upload->replacefragment(UploadFragment())
-                R.id.maps->replacefragment(MapsFragment())
-                R.id.setting->replacefragment(SettingFragment())
-                R.id.profile->replacefragment(ProfileFragment())
-                else->{
-
-                }
+                R.id.homepage -> replaceFragment(HomeFragment())
+                R.id.upload -> replaceFragment(UploadFragment())
+                R.id.maps -> replaceFragment(MapsFragment())
+                R.id.setting -> replaceFragment(SettingFragment())
+                R.id.profile -> replaceFragment(ProfileFragment())
+                else -> { }
             }
             true
         }
-
     }
 
-    private fun replacefragment(fragment:Fragment){
+    private fun enableFullscreen() {
+        window.decorView.systemUiVisibility = (
+                View.SYSTEM_UI_FLAG_FULLSCREEN
+                        or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        or View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
+                )
+        actionBar?.hide()
+    }
+
+    private fun replaceFragment(fragment: Fragment) {
         val fragmentManager = supportFragmentManager
-        val fragmenttransaction = fragmentManager.beginTransaction()
-        fragmenttransaction.replace(R.id.frame,fragment)
-        fragmenttransaction.commit()
+        val fragmentTransaction = fragmentManager.beginTransaction()
+        fragmentTransaction.replace(R.id.frame, fragment)
+        fragmentTransaction.commit()
     }
-
-
 }

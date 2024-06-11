@@ -110,6 +110,89 @@
             </com.google.android.material.textfield.TextInputLayout>
 
             <TextView
+                android:id="@+id/addressTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/address"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/usernameditTextLayout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/addressEditTextLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                app:boxBackgroundColor="@color/gray"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addressTextView"
+                app:placeholderText="@string/address_placeholder"
+                app:placeholderTextColor="@color/black"
+                app:startIconTint="@color/black"
+                app:startIconDrawable="@drawable/baseline_add_home_24">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_regis_address"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="text"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <TextView
+                android:id="@+id/uploadFileTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginTop="32dp"
+                android:text="@string/upload_file"
+                android:textColor="@color/black"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/addressEditTextLayout" />
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/fileUploadEditTextLayout"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="32dp"
+                android:layout_marginEnd="32dp"
+                app:boxBackgroundColor="@color/gray"
+                app:boxCornerRadiusTopStart="20dp"
+                app:boxCornerRadiusBottomEnd="20dp"
+                app:boxCornerRadiusBottomStart="20dp"
+                app:boxCornerRadiusTopEnd="20dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/uploadFileTextView"
+                app:placeholderText="@string/upload_file_placeholder"
+                app:placeholderTextColor="@color/black"
+                app:startIconTint="@color/black"
+                app:startIconDrawable="@drawable/baseline_arrow_circle_up_24"
+                app:endIconMode="custom"
+                app:endIconDrawable="@drawable/baseline_attach_file_24"
+                app:endIconTint="@color/black"
+                app:endIconContentDescription="@string/upload_file">
+
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/ed_regis_file_upload"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:inputType="none"
+                    tools:ignore="SpeakableTextPresentCheck" />
+            </com.google.android.material.textfield.TextInputLayout>
+            <TextView
                 android:id="@+id/passwordTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"

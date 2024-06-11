@@ -7,27 +7,36 @@
     android:layout_height="match_parent"
     tools:context=".view.main.MainActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+    <FrameLayout
+        android:layout_width="0dp"
+        android:id="@+id/frame"
+        app:layout_constraintBottom_toTopOf="@+id/bottomnavigation"
         app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginTop="20dp">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_height="0dp"
+        >
 
 
-        <Button
-            android:id="@+id/submitlogout"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/logout"
-            android:backgroundTint="@color/aquamarine"
-            android:layout_weight="1"
-            android:layout_marginTop="50dp"
-            android:layout_marginStart="130dp"
-            android:layout_marginEnd="130dp"
-             />
+    </FrameLayout>
 
-    </LinearLayout>
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomnavigation"
+        app:itemActiveIndicatorStyle="@style/Base.Theme.Clicked"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:labelVisibilityMode="labeled"
+        app:layout_constraintStart_toStartOf="parent"
+        app:itemIconTint="@color/color_nav"
+        app:itemTextColor="@color/color_nav"
+        app:itemPaddingTop="20dp"
+        android:background="@drawable/bg_navbottom"
+        app:itemBackground="@drawable/itembackground"
+        android:paddingTop="0dp"
+        app:menu="@menu/bottom_nav">
+
+    </com.google.android.material.bottomnavigation.BottomNavigationView>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

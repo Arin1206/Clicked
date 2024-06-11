@@ -52,4 +52,10 @@
     <string name="username_placeholder">Masukkan Username Anda</string>
     <string name="sudahpunyaakun">Sudah Punya akun?</string>
     <string name="logout">Logout</string>
+    <string name="address">Alamat</string>
+    <string name="address_placeholder">Masukkan alamat anda</string>
+    <string name="upload_file">Upload File</string>
+    <string name="upload_file_placeholder">Masukkan Foto Profil</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

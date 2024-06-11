@@ -36,11 +36,11 @@ class LoginActivity : AppCompatActivity() {
 
                 firebaseAuth.signInWithEmailAndPassword(email, pass).addOnCompleteListener {
                     if (it.isSuccessful) {
+                        Toast.makeText(this, "Successfully login", Toast.LENGTH_SHORT).show()
                         val intent = Intent(this, MainActivity::class.java)
                         startActivity(intent)
                     } else {
                         Toast.makeText(this, it.exception.toString(), Toast.LENGTH_SHORT).show()
-
                     }
                 }
             } else {
@@ -48,14 +48,19 @@ class LoginActivity : AppCompatActivity() {
 
             }
         }
-        if(firebaseAuth.currentUser != null){
-            val intent = Intent(this, MainActivity::class.java)
-            startActivity(intent)
-        }
+
     }
     fun onRegisterClick(view: android.view.View) {
         val intent = Intent(this, RegisterActivity::class.java)
         startActivity(intent)
+    }
+
+    override fun onStart() {
+        super.onStart()
+        if(firebaseAuth.currentUser != null){
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
+        }
     }
 
 }

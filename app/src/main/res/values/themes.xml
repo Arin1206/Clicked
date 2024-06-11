@@ -2,6 +2,11 @@
     <!-- Base application theme. -->
     <style name="Base.Theme.Clicked" parent="Theme.Material3.DayNight.NoActionBar">
         <!-- Customize your light theme here. -->
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="android:selectableItemBackground">@color/white</item>
+        <item name="colorPrimaryContainer">@color/white</item>
+        <item name="android:windowBackground">@color/white</item>
+        <item name="android:colorControlHighlight">@color/white</item>
         <!-- <item name="colorPrimary">@color/my_light_primary</item> -->
     </style>
 

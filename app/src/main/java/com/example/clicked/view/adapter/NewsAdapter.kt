@@ -1,31 +1,60 @@
 package com.example.clicked.view.adapter
 
+import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.fragment.app.FragmentActivity
+import androidx.navigation.findNavController
+import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.clicked.R
 import com.example.clicked.data.News
+import com.example.clicked.view.Update.UpdateFragment
+import com.example.clicked.view.detail.DetailFragment
 
 class NewsAdapter(private var newsList: List<News>) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
+    var onClickListener: View.OnClickListener? = null
+    private lateinit var activity: FragmentActivity
+
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsViewHolder {
         val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_posts, parent, false)
+        activity = parent.context as FragmentActivity
         return NewsViewHolder(view)
     }
-
 
     override fun onBindViewHolder(holder: NewsViewHolder, position: Int) {
         val newsItem = newsList[position]
         holder.bind(newsItem)
+        holder.itemView.setOnClickListener {
+            // Access the itemView's context to find the NavController
+            activity.supportFragmentManager.beginTransaction()
+                .replace(R.id.frame, DetailFragment())
+                .addToBackStack(null)  // Optional: untuk menambahkan transaksi ke back stack
+                .commit()
+        }
+
     }
 
     fun updateNewsList(newsList: List<News>) {
         this.newsList = newsList
         notifyDataSetChanged()
+    }
+
+    fun getNewsAtPosition(position: Int): News {
+        return newsList[position]
+    }
+
+    fun removeNewsAtPosition(position: Int) {
+        val mutableList = newsList.toMutableList()
+        mutableList.removeAt(position)
+        newsList = mutableList
+        notifyItemRemoved(position)
     }
 
     override fun getItemCount(): Int {
@@ -37,6 +66,9 @@ class NewsAdapter(private var newsList: List<News>) : RecyclerView.Adapter<NewsA
         private val judulPosts = itemView.findViewById<TextView>(R.id.judulposts)
         private val tanggalPosts = itemView.findViewById<TextView>(R.id.tanggalposts)
         private val isiPosts = itemView.findViewById<TextView>(R.id.isiposts)
+        private val editButton = itemView.findViewById<TextView>(R.id.buttonedit)
+
+
 
         fun bind(newsItem: News) {
             judulPosts.text = newsItem.title
@@ -49,6 +81,29 @@ class NewsAdapter(private var newsList: List<News>) : RecyclerView.Adapter<NewsA
                     .load(it)
                     .into(imgItemPhoto)
             }
+            // Set the news item ID as the tag of the editButton
+            // Set the news item ID as the tag of the editButton
+            editButton.tag = newsItem.id
+            editButton.setOnClickListener {
+                // Get the news item ID from the tag
+                val newsId = it.tag as String
+
+                // Show a toast with the news item ID
+                Toast.makeText(it.context, "News ID: $newsId", Toast.LENGTH_SHORT).show()
+
+                val bundle = Bundle().apply {
+                    putString("newsId", newsId)
+                }
+                val updateFragment = UpdateFragment().apply {
+                    arguments = bundle
+                }
+                activity.supportFragmentManager.beginTransaction()
+                    .replace(R.id.frame, updateFragment)
+                    .addToBackStack(null)
+                    .commit()
+            }
         }
     }
+
+
 }

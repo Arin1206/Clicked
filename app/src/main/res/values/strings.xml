@@ -83,7 +83,16 @@
     <string name="textparagraf3">Paragraf 3</string>
     <string name="tags">Tags</string>
     <string name="saveButton">Publikasikan</string>
+    <string name="textedit">Edit Posts</string>
     <string-array name="spinner_items">
+        <item>Teknologi</item>
+        <item>Bisnis</item>
+        <item>Kesehatan</item>
+        <item>Ekonomi</item>
+        <item>Lifestyle</item>
+        <item>Politik</item>
+    </string-array>
+    <string-array name="tags_array">
         <item>Teknologi</item>
         <item>Bisnis</item>
         <item>Kesehatan</item>

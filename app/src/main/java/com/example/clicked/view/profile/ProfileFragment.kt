@@ -9,12 +9,14 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.clicked.R
 import com.example.clicked.data.News
 import com.example.clicked.databinding.FragmentProfileBinding
-import com.example.clicked.databinding.FragmentSettingBinding
 import com.example.clicked.view.adapter.NewsAdapter
 import com.example.clicked.view.common.BaseFragment
 import com.example.clicked.view.welcome.WelcomeActivity
@@ -22,15 +24,11 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
 
-
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate)  {
     private lateinit var firebaseAuth: FirebaseAuth
     private lateinit var adapter: NewsAdapter
-    override fun setupUI() {
 
-
-    }
-
+    override fun setupUI() {}
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -40,12 +38,44 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         adapter = NewsAdapter(emptyList()) // Initialize with an empty list
         recyclerView.adapter = adapter
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
+
+        // Attach ItemTouchHelper to RecyclerView
+        val itemTouchHelper = ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) {
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val newsItem = adapter.getNewsAtPosition(position)
+
+                // Show confirmation dialog
+                AlertDialog.Builder(requireContext())
+                    .setTitle("Delete News")
+                    .setMessage("Are you sure you want to delete this news?")
+                    .setPositiveButton("Yes") { dialog, _ ->
+                        deleteNewsFromFirestore(newsItem)
+                        adapter.removeNewsAtPosition(position)
+                        dialog.dismiss()
+                    }
+                    .setNegativeButton("No") { dialog, _ ->
+                        adapter.notifyItemChanged(position)
+                        dialog.dismiss()
+                    }
+                    .create()
+                    .show()
+            }
+        })
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     override fun setupListeners() {
 
     }
-
 
     override fun setupObservers() {
         val currentUser = FirebaseAuth.getInstance().currentUser
@@ -55,7 +85,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             fetchDataFromFirebase() // Call the function to fetch user data
         }
     }
-
 
     private fun fetchDataFromFirebase() {
         binding.loadingProgressBar.visibility = View.VISIBLE // Show ProgressBar
@@ -99,6 +128,7 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             }
         }
     }
+
     private fun countPosts(userId: String) {
         val db = FirebaseFirestore.getInstance()
         val newsRef = db.collection("news")
@@ -112,7 +142,6 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
     }
 
-
     private fun fetchNewsFromFirestore(userId: String) {
         // Show ProgressBar
         binding.loadingProgressBar.visibility = View.VISIBLE
@@ -122,18 +151,18 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         val newsRef = db.collection("news")
             .whereEqualTo("userId", userId) // Filter news by user ID
 
-
         newsRef.get().addOnSuccessListener { documents ->
             val newsList = mutableListOf<News>() // Create a list to hold news items
 
             for (document in documents) {
+                val id = document.id
                 val title = document.getString("judulBerita")
                 val imageUrl = document.getString("imageUrl")
                 val date = document.getString("formattedDate")
                 val paragraph = document.getString("paragraf1")
 
                 // Add news item to the list
-                val newsItem = News(title, imageUrl, date, paragraph)
+                val newsItem = News(id,title, imageUrl, date, paragraph)
                 newsList.add(newsItem)
             }
 
@@ -152,6 +181,19 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
         }
     }
 
+    private fun deleteNewsFromFirestore(news: News) {
+        val db = FirebaseFirestore.getInstance()
+        val newsRef = db.collection("news")
 
-
+        // Assuming "title" is a unique identifier for news items
+        newsRef.whereEqualTo("judulBerita", news.title).get().addOnSuccessListener { documents ->
+            for (document in documents) {
+                newsRef.document(document.id).delete().addOnSuccessListener {
+                    Log.d(ContentValues.TAG, "News successfully deleted")
+                }.addOnFailureListener { e ->
+                    Log.w(ContentValues.TAG, "Error deleting news", e)
+                }
+            }
+        }
+    }
 }

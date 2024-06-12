@@ -9,22 +9,38 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.example.clicked.R
+import com.example.clicked.data.News
 import com.example.clicked.databinding.FragmentProfileBinding
 import com.example.clicked.databinding.FragmentSettingBinding
+import com.example.clicked.view.adapter.NewsAdapter
 import com.example.clicked.view.common.BaseFragment
 import com.example.clicked.view.welcome.WelcomeActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.Query
 
 
 class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBinding::inflate)  {
     private lateinit var firebaseAuth: FirebaseAuth
+    private lateinit var adapter: NewsAdapter
     override fun setupUI() {
+
 
     }
 
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        // Initialize RecyclerView and Adapter
+        val recyclerView = binding.rvPost
+        adapter = NewsAdapter(emptyList()) // Initialize with an empty list
+        recyclerView.adapter = adapter
+        recyclerView.layoutManager = LinearLayoutManager(requireContext())
+    }
 
     override fun setupListeners() {
 
@@ -32,8 +48,14 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
 
 
     override fun setupObservers() {
-        fetchDataFromFirebase()
+        val currentUser = FirebaseAuth.getInstance().currentUser
+        currentUser?.let { user ->
+            val userId = user.uid
+            fetchNewsFromFirestore(userId) // Call the function with user ID
+            fetchDataFromFirebase() // Call the function to fetch user data
+        }
     }
+
 
     private fun fetchDataFromFirebase() {
         binding.loadingProgressBar.visibility = View.VISIBLE // Show ProgressBar
@@ -61,6 +83,11 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                             .load(it)
                             .into(binding.imageprofile2)
                     }
+
+                    // Hitung dan tampilkan jumlah news yang dipost
+                    val totalPosts = document.getLong("totalPosts") ?: 0
+                    binding.totalpost.text = totalPosts.toString() // Bind to totalposts TextView
+
                     binding.loadingProgressBar.visibility = View.GONE // Hide ProgressBar after loading data
                 } else {
                     Log.d(ContentValues.TAG, "Document does not exist")
@@ -72,4 +99,59 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
             }
         }
     }
+    private fun countPosts(userId: String) {
+        val db = FirebaseFirestore.getInstance()
+        val newsRef = db.collection("news")
+            .whereEqualTo("userId", userId) // Filter news by user ID
+
+        newsRef.get().addOnSuccessListener { documents ->
+            val totalPosts = documents.size() // Count the number of news posts
+            binding.totalpost.text = totalPosts.toString() // Bind to totalposts TextView
+        }.addOnFailureListener { exception ->
+            Log.d(ContentValues.TAG, "Error counting posts: $exception")
+        }
+    }
+
+
+    private fun fetchNewsFromFirestore(userId: String) {
+        // Show ProgressBar
+        binding.loadingProgressBar.visibility = View.VISIBLE
+
+        // Fetch news data from Firestore based on user ID
+        val db = FirebaseFirestore.getInstance()
+        val newsRef = db.collection("news")
+            .whereEqualTo("userId", userId) // Filter news by user ID
+
+
+        newsRef.get().addOnSuccessListener { documents ->
+            val newsList = mutableListOf<News>() // Create a list to hold news items
+
+            for (document in documents) {
+                val title = document.getString("judulBerita")
+                val imageUrl = document.getString("imageUrl")
+                val date = document.getString("formattedDate")
+                val paragraph = document.getString("paragraf1")
+
+                // Add news item to the list
+                val newsItem = News(title, imageUrl, date, paragraph)
+                newsList.add(newsItem)
+            }
+
+            // Update RecyclerView adapter with the fetched data
+            adapter.updateNewsList(newsList)
+
+            // Count and display the total number of posts
+            countPosts(userId)
+
+            // Hide ProgressBar after loading data
+            binding.loadingProgressBar.visibility = View.GONE
+        }.addOnFailureListener { exception ->
+            Log.d(ContentValues.TAG, "Error getting documents: $exception")
+            // Hide ProgressBar on failure
+            binding.loadingProgressBar.visibility = View.GONE
+        }
+    }
+
+
+
 }

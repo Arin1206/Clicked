@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:id="@+id/profilefragment"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.profile.ProfileFragment">
 
@@ -130,7 +131,7 @@
             android:background="@color/gray"/>
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_stopsession"
+            android:id="@+id/rv_post"
             android:layout_width="match_parent"
             android:layout_marginTop="20dp"
             android:layout_marginHorizontal="10dp"

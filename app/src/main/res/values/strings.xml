@@ -76,10 +76,19 @@
     <string name="sertakanlokasi">Sertakan Lokasi Anda</string>
     <string name="paragraf1">Masukkan Paragraf 1</string>
     <string name="paragraf2">Masukkan Paragraf 2</string>
+    <string name="judulberita">Masukkan Judul Berita</string>
+    <string name="judul">Judul</string>
+    <string name="textparagraf1">Paragraf 1</string>
+    <string name="textparagraf2">Paragraf 2</string>
+    <string name="textparagraf3">Paragraf 3</string>
+    <string name="tags">Tags</string>
+    <string name="saveButton">Publikasikan</string>
     <string-array name="spinner_items">
-        <item>Item 1</item>
-        <item>Item 2</item>
-        <item>Item 3</item>
-        <item>Item 4</item>
+        <item>Teknologi</item>
+        <item>Bisnis</item>
+        <item>Kesehatan</item>
+        <item>Ekonomi</item>
+        <item>Lifestyle</item>
+        <item>Politik</item>
     </string-array>
 </resources>

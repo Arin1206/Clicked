@@ -170,44 +170,67 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding
         val dateFormat = SimpleDateFormat("d MMMM yyyy")
         val currentDate = dateFormat.format(Date())
 
-        val imageUrl = currentImageUri?.toString() ?: ""
-
-        if (imageUrl.isEmpty()) {
-            Toast.makeText(requireContext(), "Image cannot be empty", Toast.LENGTH_SHORT).show()
-            return
-        }
-
         val userId = auth.currentUser?.uid ?: ""
 
-        val updatedNews = mutableMapOf(
-            "judulBerita" to binding.judulberitaedit.text.toString(),
-            "paragraf1" to binding.paragraf1edit.text.toString(),
-            "paragraf2" to binding.paragraf2edit.text.toString(),
-            "paragraf3" to binding.paragraf3edit.text.toString(),
-            "spinnerItem" to binding.mySpinneredit.selectedItem.toString(),
-            "includePosition" to includePosition,
-            "latitude" to latitude,
-            "longitude" to longitude,
-            "formattedDate" to currentDate,
-            "timestamps" to FieldValue.serverTimestamp(),
-            "imageUrl" to imageUrl,
-            "userId" to userId
-        )
+        // Fetch the existing image URL from Firestore
+        newsRef.get().addOnSuccessListener { document ->
+            val existingImageUrl = document.getString("imageUrl") ?: ""
 
-        // Upload image to Firebase Storage
-        val storageRef = FirebaseStorage.getInstance().reference.child("images/${System.currentTimeMillis()}_image.jpg")
-        val uploadTask = storageRef.putFile(currentImageUri!!)
+            val imageUrl = currentImageUri?.toString() ?: existingImageUrl
 
-        uploadTask.addOnSuccessListener { taskSnapshot ->
-            storageRef.downloadUrl.addOnSuccessListener { uri ->
-                val imageUrl = uri.toString()
-                updatedNews["imageUrl"] = imageUrl
+            if (imageUrl.isEmpty()) {
+                binding.loadingProgressBar.visibility = View.GONE
+                Toast.makeText(requireContext(), "Image cannot be empty", Toast.LENGTH_SHORT).show()
+                return@addOnSuccessListener
+            }
 
-                // Update Firestore with the new news details including the image URL
+            val updatedNews = mutableMapOf(
+                "judulBerita" to binding.judulberitaedit.text.toString(),
+                "paragraf1" to binding.paragraf1edit.text.toString(),
+                "paragraf2" to binding.paragraf2edit.text.toString(),
+                "paragraf3" to binding.paragraf3edit.text.toString(),
+                "spinnerItem" to binding.mySpinneredit.selectedItem.toString(),
+                "includePosition" to includePosition,
+                "latitude" to latitude,
+                "longitude" to longitude,
+                "formattedDate" to currentDate,
+                "timestamps" to FieldValue.serverTimestamp(),
+                "imageUrl" to imageUrl,
+                "userId" to userId
+            )
+
+            if (currentImageUri != null) {
+                // Upload new image to Firebase Storage
+                val storageRef = FirebaseStorage.getInstance().reference.child("images/${System.currentTimeMillis()}_image.jpg")
+                val uploadTask = storageRef.putFile(currentImageUri!!)
+
+                uploadTask.addOnSuccessListener { taskSnapshot ->
+                    storageRef.downloadUrl.addOnSuccessListener { uri ->
+                        val newImageUrl = uri.toString()
+                        updatedNews["imageUrl"] = newImageUrl
+
+                        // Update Firestore with the new news details including the new image URL
+                        newsRef.set(updatedNews).addOnSuccessListener {
+                            binding.loadingProgressBar.visibility = View.GONE
+                            Toast.makeText(requireContext(), "News details saved successfully", Toast.LENGTH_SHORT).show()
+                            val profileFragment = ProfileFragment()
+                            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame, profileFragment)
+                                ?.addToBackStack(null)?.commit()
+                        }.addOnFailureListener { exception ->
+                            binding.loadingProgressBar.visibility = View.GONE
+                            Toast.makeText(requireContext(), "Failed to save news details", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }.addOnFailureListener { exception ->
+                    binding.loadingProgressBar.visibility = View.GONE
+                    Toast.makeText(requireContext(), "Failed to upload image", Toast.LENGTH_SHORT).show()
+                }
+            } else {
+                // No new image to upload, just update Firestore with existing image URL
                 newsRef.set(updatedNews).addOnSuccessListener {
                     binding.loadingProgressBar.visibility = View.GONE
                     Toast.makeText(requireContext(), "News details saved successfully", Toast.LENGTH_SHORT).show()
-                    val profileFragment = ProfileFragment() // Buat instance ProfileFragment
+                    val profileFragment = ProfileFragment()
                     activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame, profileFragment)
                         ?.addToBackStack(null)?.commit()
                 }.addOnFailureListener { exception ->
@@ -216,9 +239,11 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding
                 }
             }
         }.addOnFailureListener { exception ->
-            Toast.makeText(requireContext(), "Failed to upload image", Toast.LENGTH_SHORT).show()
+            binding.loadingProgressBar.visibility = View.GONE
+            Toast.makeText(requireContext(), "Failed to fetch existing image URL", Toast.LENGTH_SHORT).show()
         }
     }
+
 
     private val launcherIntentCamera = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
         if (result.resultCode == Activity.RESULT_OK) {

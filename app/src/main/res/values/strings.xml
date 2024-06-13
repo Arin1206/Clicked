@@ -84,6 +84,12 @@
     <string name="tags">Tags</string>
     <string name="saveButton">Publikasikan</string>
     <string name="textedit">Edit Posts</string>
+    <string name="judul_home">Poin-poin Kontroversial dalam RUU Penyiaran</string>
+    <string name="tanggal_home">03 Juni 2024</string>
+    <string name="readmore">read more...</string>
+    <string name="teknologi">TEKNOLOGI</string>
+    <string name="bisnis">BISNIS</string>
+    <string name="kesehatan">KESEHATAN</string>
     <string-array name="spinner_items">
         <item>Teknologi</item>
         <item>Bisnis</item>

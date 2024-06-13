@@ -15,5 +15,7 @@
         <item name="android:statusBarColor">@color/black</item>
     </style>
 
+
+
     <style name="Theme.Clicked" parent="Base.Theme.Clicked" />
 </resources>

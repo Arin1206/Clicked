@@ -1,14 +1,19 @@
 package com.example.clicked.view.main
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
+import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.example.clicked.R
 import com.example.clicked.databinding.ActivityMainBinding
+import com.example.clicked.view.Update.UpdateFragment
 import com.example.clicked.view.home.HomeFragment
 import com.example.clicked.view.maps.MapsFragment
 import com.example.clicked.view.profile.ProfileFragment
@@ -17,7 +22,7 @@ import com.example.clicked.view.upload.UploadFragment
 import com.google.firebase.auth.FirebaseAuth
 
 class MainActivity : AppCompatActivity() {
-    private lateinit var binding: ActivityMainBinding
+    internal lateinit var binding: ActivityMainBinding
     private lateinit var firebaseAuth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -54,6 +59,7 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+
     private fun enableFullscreen() {
         window.decorView.systemUiVisibility = (
                 View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -63,10 +69,19 @@ class MainActivity : AppCompatActivity() {
         actionBar?.hide()
     }
 
-    private fun replaceFragment(fragment: Fragment) {
+    fun replaceFragment(fragment: Fragment, hideBottomNavigation: Boolean = false) {
         val fragmentManager = supportFragmentManager
         val fragmentTransaction = fragmentManager.beginTransaction()
         fragmentTransaction.replace(R.id.frame, fragment)
+
+        if (hideBottomNavigation) {
+            binding.bottomnavigation.visibility = View.GONE
+        } else {
+            binding.bottomnavigation.visibility = View.VISIBLE
+        }
+
         fragmentTransaction.commit()
     }
+
+
 }

@@ -32,9 +32,14 @@ class NewsAdapter(private var newsList: List<News>) : RecyclerView.Adapter<NewsA
         val newsItem = newsList[position]
         holder.bind(newsItem)
         holder.itemView.setOnClickListener {
-            // Access the itemView's context to find the NavController
+            val bundle = Bundle().apply {
+                putString("newsId", newsItem.id)
+            }
+            val detailFragment = DetailFragment().apply {
+                arguments = bundle
+            }
             activity.supportFragmentManager.beginTransaction()
-                .replace(R.id.frame, DetailFragment())
+                .replace(R.id.frame, detailFragment)
                 .addToBackStack(null)  // Optional: untuk menambahkan transaksi ke back stack
                 .commit()
         }
@@ -101,6 +106,8 @@ class NewsAdapter(private var newsList: List<News>) : RecyclerView.Adapter<NewsA
                     .replace(R.id.frame, updateFragment)
                     .addToBackStack(null)
                     .commit()
+
+
             }
         }
     }

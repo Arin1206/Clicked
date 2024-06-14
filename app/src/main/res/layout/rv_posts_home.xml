@@ -8,7 +8,7 @@
     android:layout_gravity="center"
     android:layout_marginTop="4dp"
     card_view:cardBackgroundColor="@color/gray"
-    card_view:strokeWidth="1dp"
+    card_view:strokeWidth="2dp"
     android:layout_marginBottom="6dp"
     card_view:cardCornerRadius="12dp"
     card_view:strokeColor="@color/aquamarine"
@@ -19,40 +19,71 @@
         android:layout_height="match_parent"
         android:paddingBottom="10dp">
 
-
-        <TextView
-            android:id="@+id/judulposts"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
-            android:paddingVertical="10dp"
-            android:layout_marginBottom="20dp"
-            android:textColor="@color/black"
-            android:textSize="20sp"
-            android:textStyle="bold"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            tools:layout_editor_absoluteY="2dp"
-            tools:text="@string/judulposts"
-            tools:ignore="MissingConstraints" />
-
-        <TextView
-            android:id="@+id/tanggalposts"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="18dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginTop="4dp"
-            android:paddingLeft="10dp"
-            android:textColor="@color/black"
-            android:textSize="12sp"
-            android:textStyle="italic"
-            card_view:layout_constraintTop_toBottomOf="@+id/judulposts"
-            tools:text="@string/tanggalposts" />
-
+            android:orientation="vertical"
+            tools:ignore="MissingConstraints">
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal">
+                <TextView
+                    android:id="@+id/judulposts"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:paddingVertical="10dp"
+                    android:layout_marginBottom="0dp"
+                    android:textColor="@color/black"
+                    android:textSize="20sp"
+                    android:textStyle="bold"
+                    card_view:layout_constraintEnd_toEndOf="parent"
+                    tools:layout_editor_absoluteY="2dp"
+                    tools:text="@string/judulposts"
+                    tools:ignore="MissingConstraints" />
+            </LinearLayout>
 
 
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                >
 
+                <TextView
+                    android:id="@+id/tanggalposts"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:layout_marginTop="4dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_weight="1"
+                    android:paddingLeft="10dp"
+                    android:textColor="@color/black"
+                    android:textSize="12sp"
+                    android:textStyle="italic"
+                    card_view:layout_constraintTop_toBottomOf="@+id/judulposts"
+                    tools:text="@string/tanggalposts" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="end"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="5dp"
+                    android:textSize="14dp"
+                    android:background="@color/gray"
+                    android:drawableStart="@drawable/baseline_arrow_forward_24"
+
+                    android:drawableTint="@color/black"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/black"
+                    android:textStyle="italic" />
+            </LinearLayout>
+        </LinearLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </com.google.android.material.card.MaterialCardView>

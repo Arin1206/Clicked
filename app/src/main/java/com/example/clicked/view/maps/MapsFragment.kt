@@ -1,35 +1,28 @@
 package com.example.clicked.view.maps
 
 import androidx.fragment.app.Fragment
-
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import com.example.clicked.R
-
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import com.google.firebase.firestore.FirebaseFirestore
 
 class MapsFragment : Fragment() {
 
+    private lateinit var googleMap: GoogleMap
+    private val offset = 0.0001 // Offset to slightly separate overlapping markers
+
     private val callback = OnMapReadyCallback { googleMap ->
-        /**
-         * Manipulates the map once available.
-         * This callback is triggered when the map is ready to be used.
-         * This is where we can add markers or lines, add listeners or move the camera.
-         * In this case, we just add a marker near Sydney, Australia.
-         * If Google Play services is not installed on the device, the user will be prompted to
-         * install it inside the SupportMapFragment. This method will only be triggered once the
-         * user has installed Google Play services and returned to the app.
-         */
-        val sydney = LatLng(-34.0, 151.0)
-        googleMap.addMarker(MarkerOptions().position(sydney).title("Marker in Sydney"))
-        googleMap.moveCamera(CameraUpdateFactory.newLatLng(sydney))
+        this.googleMap = googleMap
+        googleMap.uiSettings.isZoomControlsEnabled = true // Enable zoom controls
+        fetchNewsData()
     }
 
     override fun onCreateView(
@@ -44,5 +37,39 @@ class MapsFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         val mapFragment = childFragmentManager.findFragmentById(R.id.map) as SupportMapFragment?
         mapFragment?.getMapAsync(callback)
+    }
+
+    private fun fetchNewsData() {
+        val db = FirebaseFirestore.getInstance()
+        db.collection("news")
+            .get()
+            .addOnSuccessListener { result ->
+                val markerLocations = mutableSetOf<LatLng>()
+                for (document in result) {
+                    var latitude = document.getDouble("latitude")
+                    var longitude = document.getDouble("longitude")
+                    val title = document.getString("judulBerita")
+                    val description = document.getString("paragraf1")
+
+                    if (latitude != null && longitude != null && title != null && description != null) {
+                        var location = LatLng(latitude, longitude)
+                        // Check if location already exists and adjust if necessary
+                        while (markerLocations.contains(location)) {
+                            latitude += offset
+                            longitude += offset
+                            location = LatLng(latitude, longitude)
+                        }
+                        markerLocations.add(location)
+
+                        googleMap.addMarker(
+                            MarkerOptions().position(location).title(title).snippet(description)
+                        )
+                        googleMap.moveCamera(CameraUpdateFactory.newLatLng(location))
+                    }
+                }
+            }
+            .addOnFailureListener { exception ->
+                // Handle the error
+            }
     }
 }

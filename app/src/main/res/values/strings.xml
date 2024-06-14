@@ -90,6 +90,15 @@
     <string name="teknologi">TEKNOLOGI</string>
     <string name="bisnis">BISNIS</string>
     <string name="kesehatan">KESEHATAN</string>
+    <string name="ekonomi">EKONOMI</string>
+    <string name="lifestyle">LIFESTYLE</string>
+    <string name="politik">POLITIK</string>
+    <string name="tekslengkap">Poin-poin Kontroversial dalam RUU Penyiaran</string>
+    <string name="nameprofile">Favour Ishecap</string>
+    <string name="teksparagraf1">Sejumlah pihak sebelumnya telah melayangkan kritik keras terhadap wacana revisi UU Penyiaran. Dewan Pers menilai sejumlah poin RUU Penyiaran berpotensi mengekang kemerdekaan pers dan berpeluang melahirkan produk jurnalistik yang buruk. Sementara, Ketua Komisi I DPR Meutya Hafid menegaskan pihaknya tak memiliki niat sama sekali untuk mengecilkan peran media massa lewat RUU Penyiaran. Komisi I DPR merupakan pihak yang sejak awal mengusulkan revisi UU tersebut.</string>
+    <string name="teksparagraf2">Meutya mengaku memiliki hubungan yang baik dengan para pemangku di industri media, termasuk dengan Dewan Pers selaku mitra kerja Komisi I DPR. Menurutnya, keberlangsungan media yang sehat tetap menjadi hal penting.</string>
+    <string name="teksparagraf3">\"Tidak ada dan tidak pernah ada semangat ataupun niatan dari Komisi I DPR untuk mengecilkan peran Pers,\" kata dia lewat keterangan tertulis, Kamis (16/5).  \"Saya sampaikan ke teman-teman semua, dari fraksi kami, sudah memerintahkan kepada saya untuk sementara tidak membahas RUU Penyiaran,\" kata Supratman di kompleks parlemen, Senin (28/5).</string>
+    <string name="textkosong">Tidak ada Data yang ditampilkan untuk kategori ini</string>
     <string-array name="spinner_items">
         <item>Teknologi</item>
         <item>Bisnis</item>

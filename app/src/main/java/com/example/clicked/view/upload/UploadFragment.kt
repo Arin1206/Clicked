@@ -23,9 +23,11 @@ import androidx.navigation.fragment.findNavController
 import com.example.clicked.R
 import com.example.clicked.databinding.FragmentUploadBinding
 import com.example.clicked.view.common.BaseFragment
+import com.example.clicked.view.profile.ProfileFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import java.io.File
@@ -224,7 +226,7 @@ class UploadFragment : BaseFragment<FragmentUploadBinding>(FragmentUploadBinding
             "paragraf3" to paragraf3,
             "spinnerItem" to spinnerItem,
             "includePosition" to includePosition,
-            "timestamp" to currentTimeMillis, // Menambahkan waktu saat ini ke data berita
+            "timestamp" to FieldValue.serverTimestamp(), // Menambahkan waktu saat ini ke data berita
             "formattedDate" to formattedDate // Menambahkan tanggal yang diformat ke data berita
         )
 
@@ -239,6 +241,9 @@ class UploadFragment : BaseFragment<FragmentUploadBinding>(FragmentUploadBinding
                 Toast.makeText(requireContext(), "News saved successfully", Toast.LENGTH_SHORT).show()
                 Log.d(ContentValues.TAG, "News saved successfully")
                 binding.loadingProgressBar.visibility = View.GONE
+                val profileFragment = ProfileFragment()
+                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame, profileFragment)
+                    ?.addToBackStack(null)?.commit()
             }
             .addOnFailureListener { e ->
                 Toast.makeText(requireContext(), "Error saving news: ${e.message}", Toast.LENGTH_SHORT).show()

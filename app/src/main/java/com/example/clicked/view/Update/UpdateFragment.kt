@@ -14,6 +14,7 @@ import android.util.Log
 import android.view.View
 import android.widget.ArrayAdapter
 import android.widget.Toast
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.ActivityCompat
@@ -23,6 +24,7 @@ import com.bumptech.glide.Glide
 import com.example.clicked.R
 import com.example.clicked.databinding.FragmentUpdateBinding
 import com.example.clicked.view.common.BaseFragment
+import com.example.clicked.view.main.MainActivity
 import com.example.clicked.view.profile.ProfileFragment
 import com.example.clicked.view.upload.UploadFragment
 import com.google.android.gms.location.FusedLocationProviderClient
@@ -52,13 +54,13 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding
             newsId = it.getString("newsId") ?: ""
             fetchNewsDetails(newsId)
         }
-
         spinnerItems = resources.getStringArray(R.array.spinner_items)
         // Mendapatkan daftar pilihan spinner dari properti spinnerItems
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerItems)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.mySpinneredit.adapter = adapter
     }
+
 
     override fun setupListeners() {
         binding.saveedit.setOnClickListener {
@@ -123,9 +125,19 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         setupListeners()
 
+        (activity as? MainActivity)?.binding?.bottomnavigation?.visibility = View.GONE
         // Request user location when the fragment opens
         getLocation()
+
+        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
+            override fun handleOnBackPressed() {
+                (activity as? MainActivity)?.binding?.bottomnavigation?.visibility = View.VISIBLE
+                activity?.supportFragmentManager?.popBackStack()
+            }
+        })
+
     }
+
     private fun fetchNewsDetails(newsId: String) {
         val db = FirebaseFirestore.getInstance()
         val newsRef = db.collection("news").document(newsId)

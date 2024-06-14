@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/profilefragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:id="@+id/profilefragment"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.profile.ProfileFragment">
 
 
@@ -12,52 +12,55 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical">
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/profile"
-        android:textAlignment="center"
-        android:textColor="@color/aquamarine"
-        android:textSize="34sp"
 
-        android:paddingVertical="10dp"
-        >
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingVertical="10dp"
+            android:text="@string/profile"
+            android:textAlignment="center"
+            android:textColor="@color/aquamarine"
 
-    </TextView>
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="2dp"
-        android:background="@color/aquamarine"/>
+            android:textSize="34sp">
+
+        </TextView>
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="2dp"
+            android:background="@color/aquamarine" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:gravity="bottom"
             android:background="@drawable/bannerprofile"
+            android:gravity="bottom"
             android:orientation="vertical">
+
             <de.hdodenhof.circleimageview.CircleImageView
                 android:id="@+id/imageprofile2"
                 android:layout_width="120dp"
                 android:layout_height="120dp"
                 android:layout_gravity="center"
+                android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginBottom="20dp"
-                android:layout_marginHorizontal="20dp"
-                app:civ_border_width="3dp"
                 app:civ_border_color="@color/black"
+                app:civ_border_width="3dp"
                 tools:srcCompat="@tools:sample/avatars" />
         </LinearLayout>
+
         <TextView
-            android:layout_width="match_parent"
             android:id="@+id/nameprof"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="@string/profile"
             android:layout_marginTop="20dp"
+            android:text="@string/profile"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textStyle="bold"
             android:textSize="20sp"
-            >
-        </TextView>
+            android:textStyle="bold"></TextView>
+
         <TextView
             android:id="@+id/emailprof"
             android:layout_width="match_parent"
@@ -65,75 +68,72 @@
             android:text="@string/profile"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            >
-        </TextView>
+            android:textSize="18sp"></TextView>
+
         <TextView
             android:id="@+id/alamatprof"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
             android:text="@string/profile"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:layout_marginBottom="20dp"
-            >
-        </TextView>
+            android:textSize="18sp"></TextView>
+
         <TextView
             android:id="@+id/totalpost"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="@string/totalpost"
             android:textAlignment="center"
-            android:textStyle="bold"
             android:textColor="@color/aquamarine"
             android:textSize="24sp"
-            >
-        </TextView>
+            android:textStyle="bold"></TextView>
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp"
+            android:text="@string/post"
             android:textAlignment="center"
             android:textColor="@color/black"
-            android:text="@string/post"
-            android:textSize="18sp"
-            android:layout_marginBottom="20dp"
-            >
-        </TextView>
+            android:textSize="18sp"></TextView>
+
         <ProgressBar
             android:id="@+id/loadingProgressBar"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            app:layout_constraintTop_toTopOf="parent"
+            android:visibility="visible"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            android:visibility="visible"/>
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:paddingHorizontal="40dp"
+            android:paddingVertical="10dp"
             android:text="@string/post"
             android:textAlignment="textStart"
             android:textColor="@color/black"
-            android:textSize="18sp"
-            android:paddingHorizontal="40dp"
-            android:paddingVertical="10dp"
-            >
+            android:textSize="18sp">
 
         </TextView>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="2dp"
             android:layout_marginHorizontal="40dp"
-            android:background="@color/gray"/>
+            android:background="@color/gray" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_post"
             android:layout_width="match_parent"
-            android:layout_marginTop="20dp"
-            android:layout_marginHorizontal="10dp"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="10dp"
+            android:layout_marginTop="20dp"
             tools:listitem="@layout/rv_posts" />
     </LinearLayout>
 

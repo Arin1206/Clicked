@@ -1,14 +1,14 @@
 <resources>
     <string name="app_name">Clicked</string>
-    <string name="Welcometext">Aplikasi Berita Harian tebaru Clicked</string>
+    <string name="Welcometext">The Latest Daily News Application Clicked</string>
     <string name="logintext">Login</string>
     <string name="registertext">Register</string>
     <string name="email">Email</string>
-    <string name="email_placeholder">Masukkan Email Anda</string>
-    <string name="password_placeholder">Masukkan Password Anda</string>
+    <string name="email_placeholder">Enter Your Email</string>
+    <string name="password_placeholder">Enter Your Password</string>
     <string name="password">Password</string>
-    <string name="belumpunyaakun">Belum Punya Akun ?</string>
-    <string name="registernow">Daftar Sekarang</string>
+    <string name="belumpunyaakun">Dont Have an Account?</string>
+    <string name="registernow">Register Now</string>
 
     <string name="lorem_ipsum">
         Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
@@ -46,73 +46,71 @@
         libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
         vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
     </string>
-    <string name="passwordconfirm_placeholder">Masukkan Kembali Password anda</string>
-    <string name="passwordconfirm">Konfirmasi Password</string>
+    <string name="passwordconfirm_placeholder">Re-enter Your Password</string>
+    <string name="passwordconfirm">Confirm Password</string>
     <string name="username">Username</string>
-    <string name="username_placeholder">Masukkan Username Anda</string>
-    <string name="sudahpunyaakun">Sudah Punya akun?</string>
+    <string name="username_placeholder">Enter Your Username</string>
+    <string name="sudahpunyaakun">Already Have an Account?</string>
     <string name="logout">Logout</string>
-    <string name="address">Alamat</string>
-    <string name="address_placeholder">Masukkan alamat anda</string>
+    <string name="address">Address</string>
+    <string name="address_placeholder">Enter Your Address</string>
     <string name="upload_file">Upload File</string>
-    <string name="upload_file_placeholder">Masukkan Foto Profil</string>
+    <string name="upload_file_placeholder">Enter Profile Photo</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="home">Home</string>
-    <string name="maps">Maps\n</string>
+    <string name="maps">Maps</string>
     <string name="upload">Upload</string>
-    <string name="setting">Setting</string>
+    <string name="setting">Settings</string>
     <string name="profile">Profile</string>
     <string name="language">Language</string>
     <string name="totalpost">23</string>
     <string name="post">Posts</string>
-    <string name="judulposts">Hasil Pertandingan Indonesia Vs Tanzania</string>
+    <string name="judulposts">Match Result Indonesia Vs Tanzania</string>
     <string name="tanggalposts">23 June 2024</string>
-    <string name="isiposts">Timnas Indonesia harus puas dengan hasil imbang saat melawan Timnas Tanzania di laga uji coba. Skuad Garuda melawan Timnas Tanzia</string>
-    <string name="postnews">Post News</string>
-    <string name="Camera">Kamera</string>
+    <string name="isiposts">The Indonesian National Team had to settle for a draw against the Tanzanian National Team in a friendly match. The Garuda squad faced the Tanzanian National Team.</string>
+    <string name="postnews">Publish News</string>
+    <string name="Camera">Camera</string>
     <string name="gallery">Gallery</string>
-    <string name="paragraf3">Masukkan Paragraf 3 jika ada</string>
-    <string name="sertakanlokasi">Sertakan Lokasi Anda</string>
-    <string name="paragraf1">Masukkan Paragraf 1</string>
-    <string name="paragraf2">Masukkan Paragraf 2</string>
-    <string name="judulberita">Masukkan Judul Berita</string>
-    <string name="judul">Judul</string>
-    <string name="textparagraf1">Paragraf 1</string>
-    <string name="textparagraf2">Paragraf 2</string>
-    <string name="textparagraf3">Paragraf 3</string>
+    <string name="paragraf3">Enter Paragraph 3 if any</string>
+    <string name="sertakanlokasi">Include Your Location</string>
+    <string name="paragraf1">Enter Paragraph 1</string>
+    <string name="paragraf2">Enter Paragraph 2</string>
+    <string name="judulberita">Enter News Title</string>
+    <string name="judul">Title</string>
+    <string name="textparagraf1">Paragraph 1</string>
+    <string name="textparagraf2">Paragraph 2</string>
+    <string name="textparagraf3">Paragraph 3</string>
     <string name="tags">Tags</string>
-    <string name="saveButton">Publikasikan</string>
-    <string name="textedit">Edit Posts</string>
-    <string name="judul_home">Poin-poin Kontroversial dalam RUU Penyiaran</string>
-    <string name="tanggal_home">03 Juni 2024</string>
+    <string name="saveButton">Publish</string>
+    <string name="textedit">Edit Post</string>
+    <string name="judul_home">Controversial Points in the Broadcasting Bill</string>
+    <string name="tanggal_home">03 June 2024</string>
     <string name="readmore">read more...</string>
-    <string name="teknologi">TEKNOLOGI</string>
-    <string name="bisnis">BISNIS</string>
-    <string name="kesehatan">KESEHATAN</string>
-    <string name="ekonomi">EKONOMI</string>
+    <string name="teknologi">TECHNOLOGY</string>
+    <string name="bisnis">BUSINESS</string>
+    <string name="kesehatan">HEALTH</string>
+    <string name="ekonomi">ECONOMY</string>
     <string name="lifestyle">LIFESTYLE</string>
-    <string name="politik">POLITIK</string>
-    <string name="tekslengkap">Poin-poin Kontroversial dalam RUU Penyiaran</string>
+    <string name="politik">POLITICS</string>
+    <string name="tekslengkap">Controversial Points in the Broadcasting Bill</string>
     <string name="nameprofile">Favour Ishecap</string>
-    <string name="teksparagraf1">Sejumlah pihak sebelumnya telah melayangkan kritik keras terhadap wacana revisi UU Penyiaran. Dewan Pers menilai sejumlah poin RUU Penyiaran berpotensi mengekang kemerdekaan pers dan berpeluang melahirkan produk jurnalistik yang buruk. Sementara, Ketua Komisi I DPR Meutya Hafid menegaskan pihaknya tak memiliki niat sama sekali untuk mengecilkan peran media massa lewat RUU Penyiaran. Komisi I DPR merupakan pihak yang sejak awal mengusulkan revisi UU tersebut.</string>
-    <string name="teksparagraf2">Meutya mengaku memiliki hubungan yang baik dengan para pemangku di industri media, termasuk dengan Dewan Pers selaku mitra kerja Komisi I DPR. Menurutnya, keberlangsungan media yang sehat tetap menjadi hal penting.</string>
-    <string name="teksparagraf3">\"Tidak ada dan tidak pernah ada semangat ataupun niatan dari Komisi I DPR untuk mengecilkan peran Pers,\" kata dia lewat keterangan tertulis, Kamis (16/5).  \"Saya sampaikan ke teman-teman semua, dari fraksi kami, sudah memerintahkan kepada saya untuk sementara tidak membahas RUU Penyiaran,\" kata Supratman di kompleks parlemen, Senin (28/5).</string>
-    <string name="textkosong">Tidak ada Data yang ditampilkan untuk kategori ini</string>
+    <string name="teksparagraf1">Previously, several parties had strongly criticized the discourse on revising the Broadcasting Law. The Press Council considers several points of the Broadcasting Bill to have the potential to restrict press freedom and produce poor journalistic products. Meanwhile, the Chairman of Commission I of the House of Representatives, Meutya Hafid, emphasized that her party has no intention of diminishing the role of the mass media through the Broadcasting Bill. Commission I of the House of Representatives is the party that has proposed the revision of the law from the beginning.</string>
+    <string name="teksparagraf2">Meutya claimed to have a good relationship with stakeholders in the media industry, including the Press Council as a working partner of Commission I of the House of Representatives. According to her, the sustainability of a healthy media remains important.</string>
+    <string name="teksparagraf3">"There has never been any intention from Commission I of the House of Representatives to diminish the role of the Press," she said in a written statement on Thursday (16/5). "I convey to all friends, from our faction, have instructed me to temporarily not discuss the Broadcasting Bill," said Supratman at the parliament complex, Monday (28/5).</string>
+    <string name="textkosong">No Data to Display for this Category</string>
     <string-array name="spinner_items">
-        <item>Teknologi</item>
-        <item>Bisnis</item>
-        <item>Kesehatan</item>
-        <item>Ekonomi</item>
+        <item>Technology</item>
+        <item>Business</item>
+        <item>Health</item>
+        <item>Economy</item>
         <item>Lifestyle</item>
-        <item>Politik</item>
+        <item>Politics</item>
     </string-array>
-    <string-array name="tags_array">
-        <item>Teknologi</item>
-        <item>Bisnis</item>
-        <item>Kesehatan</item>
-        <item>Ekonomi</item>
-        <item>Lifestyle</item>
-        <item>Politik</item>
-    </string-array>
+    <string name="confirmation_logout_title">Logout Confirmation</string>
+    <string name="confirmation_logout_message">Are you sure you want to log out?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="document_not_exist">Document does not exist</string>
+    <string name="error_getting_document">Error getting document: %1$s</string>
 </resources>

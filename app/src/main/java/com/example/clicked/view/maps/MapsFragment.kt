@@ -17,11 +17,11 @@ import com.google.firebase.firestore.FirebaseFirestore
 class MapsFragment : Fragment() {
 
     private lateinit var googleMap: GoogleMap
-    private val offset = 0.0001 // Offset to slightly separate overlapping markers
+    private val offset = 0.0001
 
     private val callback = OnMapReadyCallback { googleMap ->
         this.googleMap = googleMap
-        googleMap.uiSettings.isZoomControlsEnabled = true // Enable zoom controls
+        googleMap.uiSettings.isZoomControlsEnabled = true
         fetchNewsData()
     }
 
@@ -53,7 +53,7 @@ class MapsFragment : Fragment() {
 
                     if (latitude != null && longitude != null && title != null && description != null) {
                         var location = LatLng(latitude, longitude)
-                        // Check if location already exists and adjust if necessary
+
                         while (markerLocations.contains(location)) {
                             latitude += offset
                             longitude += offset
@@ -69,7 +69,7 @@ class MapsFragment : Fragment() {
                 }
             }
             .addOnFailureListener { exception ->
-                // Handle the error
+
             }
     }
 }

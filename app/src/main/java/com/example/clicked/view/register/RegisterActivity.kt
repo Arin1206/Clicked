@@ -5,7 +5,6 @@ import android.content.ContentValues.TAG
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
-import android.provider.MediaStore
 import android.util.Log
 import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
@@ -63,7 +62,7 @@ class RegisterActivity : AppCompatActivity() {
                 return@setOnClickListener
             }
 
-            if (password.length < 6){
+            if (password.length < 6) {
                 Toast.makeText(this, "Passwords at least 6 characters", Toast.LENGTH_SHORT).show()
                 return@setOnClickListener
             }
@@ -84,7 +83,11 @@ class RegisterActivity : AppCompatActivity() {
                         if (userId != null) {
                             db.collection("users").document(userId).set(userMap)
                                 .addOnSuccessListener {
-                                    Toast.makeText(this, "Successfully registered", Toast.LENGTH_SHORT).show()
+                                    Toast.makeText(
+                                        this,
+                                        "Successfully registered",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
                                     firebaseAuth.signOut()
                                     val intent = Intent(this, LoginActivity::class.java)
                                     startActivity(intent)
@@ -99,7 +102,11 @@ class RegisterActivity : AppCompatActivity() {
                             }
                         }
                     } else {
-                        Toast.makeText(this, "Registration failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            this,
+                            "Registration failed: ${task.exception?.message}",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
                 }
         }
@@ -130,7 +137,8 @@ class RegisterActivity : AppCompatActivity() {
                 updateUserDataWithFileUrl(userId, uploadedFileUrl)
             }
         }.addOnFailureListener { exception ->
-            Toast.makeText(this, "File upload failed: ${exception.message}", Toast.LENGTH_SHORT).show()
+            Toast.makeText(this, "File upload failed: ${exception.message}", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
@@ -149,6 +157,7 @@ class RegisterActivity : AppCompatActivity() {
         val intent = Intent(this, LoginActivity::class.java)
         startActivity(intent)
     }
+
     companion object {
         private const val PICK_IMAGE_REQUEST = 1
     }

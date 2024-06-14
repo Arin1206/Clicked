@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context=".view.home.HomeFragment">
 
     <!-- TODO: Update blank fragment layout -->
@@ -33,11 +33,11 @@
 
             <LinearLayout
                 android:id="@+id/cardview"
-                android:background="@drawable/rounded_corners"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginVertical="20dp"
+                android:background="@drawable/rounded_corners"
                 android:orientation="vertical">
 
                 <androidx.cardview.widget.CardView
@@ -46,12 +46,14 @@
                     android:layout_marginHorizontal="10dp"
                     android:layout_marginTop="10dp"
                     app:cardCornerRadius="50dp">
-                <ImageView
-                    android:id="@+id/image"
-                    android:layout_width="match_parent"
-                    android:layout_height="200dp"
-                    android:background="@drawable/home" />
+
+                    <ImageView
+                        android:id="@+id/image"
+                        android:layout_width="match_parent"
+                        android:layout_height="200dp"
+                        android:background="@drawable/home" />
                 </androidx.cardview.widget.CardView>
+
                 <TextView
                     android:id="@+id/tanggalposts"
                     android:layout_width="100dp"
@@ -60,8 +62,7 @@
                     android:layout_marginTop="5dp"
                     android:textColor="@color/black"
                     android:textSize="12sp"
-                    android:textStyle="italic"
-/>
+                    android:textStyle="italic" />
 
                 <TextView
                     android:id="@+id/textbanner"
@@ -70,18 +71,18 @@
                     android:layout_marginLeft="15dp"
                     android:layout_marginRight="40dp"
                     android:paddingBottom="5dp"
+                    android:text="@string/judul_home"
                     android:textColor="@color/black"
                     android:textSize="22sp"
                     android:textStyle="bold"
                     tools:ignore="MissingConstraints"
-                    tools:layout_editor_absoluteY="2dp"
-                    android:text="@string/judul_home" />
+                    tools:layout_editor_absoluteY="2dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="10dp"
-                    android:orientation="horizontal">
+                    android:orientation="horizontal"
+                    android:paddingBottom="10dp">
 
                     <TextView
                         android:layout_width="100dp"
@@ -89,12 +90,13 @@
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="40dp"
                         android:layout_weight="1"
+                        android:text="@string/readmore"
                         android:textColor="@color/black"
                         android:textSize="10sp"
-                        android:textStyle="italic"
-                        android:text="@string/readmore" />
+                        android:textStyle="italic" />
 
                     <TextView
+                        android:id="@+id/share"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="end"
@@ -104,7 +106,6 @@
                         android:drawableStart="@drawable/share"
                         android:textAlignment="textEnd"
                         android:textColor="@color/black"
-                        android:id="@+id/share"
                         android:textStyle="italic" />
                 </LinearLayout>
             </LinearLayout>
@@ -113,29 +114,33 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal">
-                <View
-                    android:layout_width="10dp"
-                    android:layout_marginLeft="20dp"
-                    android:layout_gravity="center_vertical"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="0dp"
-                    android:background="@drawable/rectangle_shape" />
-                <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center_vertical"
-                    android:layout_marginLeft="10dp"
-                    android:layout_marginTop="0dp"
-                    android:textColor="@color/black"
-                    android:textSize="22dp"
-                    android:textStyle="bold"
-                    android:text="@string/teknologi" />
+
+                    <View
+                        android:layout_width="10dp"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="0dp"
+                        android:background="@drawable/rectangle_shape" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginTop="0dp"
+                        android:text="@string/teknologi"
+                        android:textColor="@color/black"
+                        android:textSize="22dp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/textkosong"
                     android:layout_width="wrap_content"
@@ -143,41 +148,46 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="0dp"
+                    android:text="@string/textkosong"
                     android:textColor="@color/black"
                     android:textSize="22dp"
                     android:textStyle="bold"
-                    android:visibility="gone"
-                    android:text="@string/textkosong" />
+                    android:visibility="gone" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_post_teknologi"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="20dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
                     tools:listitem="@layout/rv_posts_home" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="horizontal">
+
                     <View
                         android:layout_width="10dp"
-                        android:layout_marginLeft="20dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="0dp"
                         android:background="@drawable/rectangle_shape" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="0dp"
+                        android:text="@string/bisnis"
                         android:textColor="@color/black"
                         android:textSize="22dp"
-                        android:textStyle="bold"
-                        android:text="@string/bisnis" />
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/textkosong2"
                     android:layout_width="wrap_content"
@@ -185,41 +195,46 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="0dp"
+                    android:text="@string/textkosong"
                     android:textColor="@color/black"
                     android:textSize="22dp"
                     android:textStyle="bold"
-                    android:visibility="gone"
-                    android:text="@string/textkosong" />
+                    android:visibility="gone" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_post_bisnis"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="20dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
                     tools:listitem="@layout/rv_posts_home" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="horizontal">
+
                     <View
                         android:layout_width="10dp"
-                        android:layout_marginLeft="20dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="0dp"
                         android:background="@drawable/rectangle_shape" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="0dp"
+                        android:text="@string/kesehatan"
                         android:textColor="@color/black"
                         android:textSize="22dp"
-                        android:textStyle="bold"
-                        android:text="@string/kesehatan" />
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/textkosong3"
                     android:layout_width="wrap_content"
@@ -227,41 +242,46 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="0dp"
+                    android:text="@string/textkosong"
                     android:textColor="@color/black"
                     android:textSize="22dp"
                     android:textStyle="bold"
-                    android:visibility="gone"
-                    android:text="@string/textkosong" />
+                    android:visibility="gone" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_post_kesehatan"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="20dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
                     tools:listitem="@layout/rv_posts_home" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="horizontal">
+
                     <View
                         android:layout_width="10dp"
-                        android:layout_marginLeft="20dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="0dp"
                         android:background="@drawable/rectangle_shape" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="0dp"
+                        android:text="@string/ekonomi"
                         android:textColor="@color/black"
                         android:textSize="22dp"
-                        android:textStyle="bold"
-                        android:text="@string/ekonomi" />
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/textkosong4"
                     android:layout_width="wrap_content"
@@ -269,41 +289,46 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="0dp"
+                    android:text="@string/textkosong"
                     android:textColor="@color/black"
                     android:textSize="22dp"
                     android:textStyle="bold"
-                    android:visibility="gone"
-                    android:text="@string/textkosong" />
+                    android:visibility="gone" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_post_ekonomi"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="20dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
                     tools:listitem="@layout/rv_posts_home" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="horizontal">
+
                     <View
                         android:layout_width="10dp"
-                        android:layout_marginLeft="20dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="0dp"
                         android:background="@drawable/rectangle_shape" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="0dp"
+                        android:text="@string/lifestyle"
                         android:textColor="@color/black"
                         android:textSize="22dp"
-                        android:textStyle="bold"
-                        android:text="@string/lifestyle" />
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/textkosong5"
                     android:layout_width="wrap_content"
@@ -311,41 +336,46 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="0dp"
+                    android:text="@string/textkosong"
                     android:textColor="@color/black"
                     android:textSize="22dp"
                     android:textStyle="bold"
-                    android:visibility="gone"
-                    android:text="@string/textkosong" />
+                    android:visibility="gone" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_post_lifestyle"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="20dp"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/rv_posts_home"/>
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    tools:listitem="@layout/rv_posts_home" />
+
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="20dp"
                     android:orientation="horizontal">
+
                     <View
                         android:layout_width="10dp"
-                        android:layout_marginLeft="20dp"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
                         android:layout_gravity="center_vertical"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginTop="0dp"
                         android:background="@drawable/rectangle_shape" />
+
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_vertical"
                         android:layout_marginLeft="10dp"
                         android:layout_marginTop="0dp"
+                        android:text="@string/politik"
                         android:textColor="@color/black"
                         android:textSize="22dp"
-                        android:textStyle="bold"
-                        android:text="@string/politik" />
+                        android:textStyle="bold" />
                 </LinearLayout>
+
                 <TextView
                     android:id="@+id/textkosong6"
                     android:layout_width="wrap_content"
@@ -353,31 +383,33 @@
                     android:layout_gravity="center_vertical"
                     android:layout_marginHorizontal="20dp"
                     android:layout_marginTop="0dp"
+                    android:text="@string/textkosong"
                     android:textColor="@color/black"
                     android:textSize="22dp"
                     android:textStyle="bold"
-                    android:visibility="gone"
-                    android:text="@string/textkosong" />
+                    android:visibility="gone" />
+
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/rv_post_politik"
                     android:layout_width="match_parent"
-                    android:layout_marginTop="10dp"
-                    android:layout_marginHorizontal="20dp"
                     android:layout_height="wrap_content"
-                    tools:listitem="@layout/rv_posts_home"/>
+                    android:layout_marginHorizontal="20dp"
+                    android:layout_marginTop="10dp"
+                    tools:listitem="@layout/rv_posts_home" />
             </LinearLayout>
 
         </LinearLayout>
 
     </ScrollView>
+
     <ProgressBar
         android:id="@+id/loadingProgressBar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        app:layout_constraintTop_toTopOf="parent"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:visibility="gone"/>
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </FrameLayout>

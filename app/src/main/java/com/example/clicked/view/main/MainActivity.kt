@@ -1,19 +1,14 @@
 package com.example.clicked.view.main
 
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.View
-import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import com.example.clicked.R
 import com.example.clicked.databinding.ActivityMainBinding
-import com.example.clicked.view.Update.UpdateFragment
 import com.example.clicked.view.home.HomeFragment
 import com.example.clicked.view.maps.MapsFragment
 import com.example.clicked.view.profile.ProfileFragment
@@ -40,20 +35,14 @@ class MainActivity : AppCompatActivity() {
         }
         replaceFragment(HomeFragment())
         firebaseAuth = FirebaseAuth.getInstance()
-//        binding.submitlogout.setOnClickListener{
-//            firebaseAuth.signOut()
-//            val intent = Intent(this, WelcomeActivity::class.java)
-//            startActivity(intent)
-//            finish()
-//        }
         binding.bottomnavigation.setOnItemSelectedListener {
-            when(it.itemId){
+            when (it.itemId) {
                 R.id.homepage -> replaceFragment(HomeFragment())
                 R.id.upload -> replaceFragment(UploadFragment())
                 R.id.maps -> replaceFragment(MapsFragment())
                 R.id.setting -> replaceFragment(SettingFragment())
                 R.id.profile -> replaceFragment(ProfileFragment())
-                else -> { }
+                else -> {}
             }
             true
         }

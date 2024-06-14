@@ -1,0 +1,116 @@
+<resources>
+    <string name="app_name">Clicked</string>
+    <string name="Welcometext">Aplikasi Berita Harian Terbaru Clicked</string>
+    <string name="logintext">Masuk</string>
+    <string name="registertext">Daftar</string>
+    <string name="email">Email</string>
+    <string name="email_placeholder">Masukkan Email Anda</string>
+    <string name="password_placeholder">Masukkan Kata Sandi Anda</string>
+    <string name="password">Kata Sandi</string>
+    <string name="belumpunyaakun">Tidak Punya Akun?</string>
+    <string name="registernow">Daftar Sekarang</string>
+
+    <string name="lorem_ipsum">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam in scelerisque sem. Mauris
+        volutpat, dolor id interdum ullamcorper, risus dolor egestas lectus, sit amet mattis purus
+        dui nec risus. Maecenas non sodales nisi, vel dictum dolor. Class aptent taciti sociosqu ad
+        litora torquent per conubia nostra, per inceptos himenaeos. Suspendisse blandit eleifend
+        diam, vel rutrum tellus vulputate quis. Aliquam eget libero aliquet, imperdiet nisl a,
+        ornare ex. Sed rhoncus est ut libero porta lobortis. Fusce in dictum tellus.\n\n
+        Suspendisse interdum ornare ante. Aliquam nec cursus lorem. Morbi id magna felis. Vivamus
+        egestas, est a condimentum egestas, turpis nisl iaculis ipsum, in dictum tellus dolor sed
+        neque. Morbi tellus erat, dapibus ut sem a, iaculis tincidunt dui. Interdum et malesuada
+        fames ac ante ipsum primis in faucibus. Curabitur et eros porttitor, ultricies urna vitae,
+        molestie nibh. Phasellus at commodo eros, non aliquet metus. Sed maximus nisl nec dolor
+        bibendum, vel congue leo egestas.\n\n
+        Sed interdum tortor nibh, in sagittis risus mollis quis. Curabitur mi odio, condimentum sit
+        amet auctor at, mollis non turpis. Nullam pretium libero vestibulum, finibus orci vel,
+        molestie quam. Fusce blandit tincidunt nulla, quis sollicitudin libero facilisis et. Integer
+        interdum nunc ligula, et fermentum metus hendrerit id. Vestibulum lectus felis, dictum at
+        lacinia sit amet, tristique id quam. Cras eu consequat dui. Suspendisse sodales nunc ligula,
+        in lobortis sem porta sed. Integer id ultrices magna, in luctus elit. Sed a pellentesque
+        est.\n\n
+        Aenean nunc velit, lacinia sed dolor sed, ultrices viverra nulla. Etiam a venenatis nibh.
+        Morbi laoreet, tortor sed facilisis varius, nibh orci rhoncus nulla, id elementum leo dui
+        non lorem. Nam mollis ipsum quis auctor varius. Quisque elementum eu libero sed commodo. In
+        eros nisl, imperdiet vel imperdiet et, scelerisque a mauris. Pellentesque varius ex nunc,
+        quis imperdiet eros placerat ac. Duis finibus orci et est auctor tincidunt. Sed non viverra
+        ipsum. Nunc quis augue egestas, cursus lorem at, molestie sem. Morbi a consectetur ipsum, a
+        placerat diam. Etiam vulputate dignissim convallis. Integer faucibus mauris sit amet finibus
+        convallis.\n\n
+        Phasellus in aliquet mi. Pellentesque habitant morbi tristique senectus et netus et
+        malesuada fames ac turpis egestas. In volutpat arcu ut felis sagittis, in finibus massa
+        gravida. Pellentesque id tellus orci. Integer dictum, lorem sed efficitur ullamcorper,
+        libero justo consectetur ipsum, in mollis nisl ex sed nisl. Donec maximus ullamcorper
+        sodales. Praesent bibendum rhoncus tellus nec feugiat. In a ornare nulla. Donec rhoncus
+        libero vel nunc consequat, quis tincidunt nisl eleifend. Cras bibendum enim a justo luctus
+        vestibulum. Fusce dictum libero quis erat maximus, vitae volutpat diam dignissim.
+    </string>
+    <string name="passwordconfirm_placeholder">Masukkan Kembali Kata Sandi Anda</string>
+    <string name="passwordconfirm">Konfirmasi Kata Sandi</string>
+    <string name="username">Nama Pengguna</string>
+    <string name="username_placeholder">Masukkan Nama Pengguna Anda</string>
+    <string name="sudahpunyaakun">Sudah Punya Akun?</string>
+    <string name="logout">Keluar</string>
+    <string name="address">Alamat</string>
+    <string name="address_placeholder">Masukkan Alamat Anda</string>
+    <string name="upload_file">Unggah File</string>
+    <string name="upload_file_placeholder">Masukkan Foto Profil</string>
+    <!-- TODO: Hapus atau ubah teks placeholder ini -->
+    <string name="hello_blank_fragment">Halo fragment kosong</string>
+    <string name="home">Beranda</string>
+    <string name="maps">Peta</string>
+    <string name="upload">Unggah</string>
+    <string name="setting">Pengaturan</string>
+    <string name="profile">Profil</string>
+    <string name="language">Bahasa</string>
+    <string name="totalpost">23</string>
+    <string name="post">Postingan</string>
+    <string name="judulposts">Hasil Pertandingan Indonesia Vs Tanzania</string>
+    <string name="tanggalposts">23 Juni 2024</string>
+    <string name="isiposts">Tim Nasional Indonesia harus puas dengan hasil imbang melawan Tim Nasional Tanzania dalam pertandingan persahabatan. Skuad Garuda menghadapi Tim Nasional Tanzania.</string>
+    <string name="postnews">Terbitkan Berita</string>
+    <string name="Camera">Kamera</string>
+    <string name="gallery">Galeri</string>
+    <string name="paragraf3">Masukkan Paragraf 3 jika ada</string>
+    <string name="sertakanlokasi">Sertakan Lokasi Anda</string>
+    <string name="paragraf1">Masukkan Paragraf 1</string>
+    <string name="paragraf2">Masukkan Paragraf 2</string>
+    <string name="judulberita">Masukkan Judul Berita</string>
+    <string name="judul">Judul</string>
+    <string name="textparagraf1">Paragraf 1</string>
+    <string name="textparagraf2">Paragraf 2</string>
+    <string name="textparagraf3">Paragraf 3</string>
+    <string name="tags">Tag</string>
+    <string name="saveButton">Terbitkan</string>
+    <string name="textedit">Edit Postingan</string>
+    <string name="judul_home">Poin Kontroversial dalam RUU Penyiaran</string>
+    <string name="tanggal_home">03 Juni 2024</string>
+    <string name="readmore">baca selengkapnya...</string>
+    <string name="teknologi">TEKNOLOGI</string>
+    <string name="bisnis">BISNIS</string>
+    <string name="kesehatan">KESEHATAN</string>
+    <string name="ekonomi">EKONOMI</string>
+    <string name="lifestyle">GAYA HIDUP</string>
+    <string name="politik">POLITIK</string>
+    <string name="tekslengkap">Poin Kontroversial dalam RUU Penyiaran</string>
+    <string name="nameprofile">Favour Ishecap</string>
+    <string name="teksparagraf1">Sebelumnya, beberapa pihak telah mengkritik keras wacana revisi Undang-Undang Penyiaran. Dewan Pers menganggap beberapa poin dalam RUU Penyiaran berpotensi membatasi kebebasan pers dan menghasilkan produk jurnalistik yang buruk. Sementara itu, Ketua Komisi I DPR, Meutya Hafid, menegaskan bahwa pihaknya tidak berniat mengurangi peran media massa melalui RUU Penyiaran. Komisi I DPR adalah pihak yang mengusulkan revisi undang-undang ini sejak awal.</string>
+    <string name="teksparagraf2">Meutya mengklaim memiliki hubungan baik dengan pemangku kepentingan di industri media, termasuk Dewan Pers sebagai mitra kerja Komisi I DPR. Menurutnya, keberlanjutan media yang sehat tetap penting.</string>
+    <string name="teksparagraf3">"Tidak pernah ada niat dari Komisi I DPR untuk mengurangi peran pers," katanya dalam pernyataan tertulis pada Kamis (16/5). "Saya sampaikan kepada semua teman-teman, dari fraksi kami, telah menginstruksikan saya untuk sementara tidak membahas RUU Penyiaran," kata Supratman di kompleks parlemen, Senin (28/5).</string>
+    <string name="textkosong">Tidak Ada Data untuk Ditampilkan dalam Kategori Ini</string>
+    <string-array name="spinner_items">
+        <item>Teknologi</item>
+        <item>Bisnis</item>
+        <item>Kesehatan</item>
+        <item>Ekonomi</item>
+        <item>Gaya Hidup</item>
+        <item>Politik</item>
+    </string-array>
+    <string name="confirmation_logout_title">Konfirmasi Keluar Akun</string>
+    <string name="confirmation_logout_message">Apakah Anda yakin ingin Keluar dari akun ini?</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="document_not_exist">Dokumen Tidak ada</string>
+    <string name="error_getting_document">Error Mendapatkan dokumen: %1$s</string>
+</resources>

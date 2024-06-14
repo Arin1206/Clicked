@@ -4,7 +4,6 @@ import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.View
-import androidx.activity.OnBackPressedCallback
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
@@ -14,20 +13,18 @@ import com.example.clicked.databinding.FragmentHomeBinding
 import com.example.clicked.view.adapter.HomeAdapter
 import com.example.clicked.view.common.BaseFragment
 import com.example.clicked.view.detail.DetailFragment
-import com.example.clicked.view.main.MainActivity
-import com.google.android.gms.location.LocationServices
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import java.util.Timer
+import java.util.TimerTask
 
 class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
 
     private lateinit var firestore: FirebaseFirestore
 
     override fun setupUI() {
-        // Initialize Firestore
         firestore = FirebaseFirestore.getInstance()
 
-        // Initialize RecyclerViews
         setupRecyclerView(binding.rvPostTeknologi, "Teknologi")
         setupRecyclerView(binding.rvPostBisnis, "Bisnis")
         setupRecyclerView(binding.rvPostKesehatan, "Kesehatan")
@@ -41,13 +38,11 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             shareNews()
         }
     }
+
     private fun shareNews() {
         val title = binding.textbanner.text.toString()
 
-        // Tambahkan paragraf lainnya jika diperlukan
-
         val shareText = "Check out this news:\n$title\n"
-        // Tambahkan paragraf lainnya ke dalam shareText jika diperlukan
 
         val sendIntent = Intent().apply {
             action = Intent.ACTION_SEND
@@ -61,17 +56,33 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
 
 
     override fun setupListeners() {
-        // Implement any listeners if necessary
+
     }
 
     override fun setupObservers() {
-        // Implement any observers if necessary
+
     }
 
 
     private fun setupRecyclerView(recyclerView: RecyclerView, category: String) {
-        recyclerView.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
+        recyclerView.layoutManager =
+            LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, false)
         binding.loadingProgressBar.visibility = View.VISIBLE
+        val timer = Timer()
+        val timerTask = object : TimerTask() {
+            override fun run() {
+                activity?.runOnUiThread {
+                    val adapter = recyclerView.adapter as HomeAdapter
+                    val currentPosition =
+                        (recyclerView.layoutManager as LinearLayoutManager).findFirstVisibleItemPosition()
+                    val nextPosition =
+                        if (currentPosition == adapter.itemCount - 1) 0 else currentPosition + 1
+                    recyclerView.smoothScrollToPosition(nextPosition)
+                }
+            }
+        }
+
+        timer.schedule(timerTask, 3000, 3000)
         recyclerView.adapter = HomeAdapter(emptyList(), requireActivity()).apply {
             fetchPosts(category)
 
@@ -91,7 +102,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                     )
                 }
                 // Log the number of fetched documents
-                Log.d("HomeFragment", "Fetched ${posts.size} documents for category $category and $id")
+                Log.d(
+                    "HomeFragment",
+                    "Fetched ${posts.size} documents for category $category and $id"
+                )
                 updatePosts(posts)
 
                 // Check if posts are empty and update visibility of empty text view
@@ -113,26 +127,32 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                 binding.loadingProgressBar.visibility = View.GONE
             }
     }
+
     private fun fetchLatestPosts() {
-        // Assuming you have a field named "timestamps" in your Firestore documents
+
         firestore.collection("news")
-            .orderBy("timestamps", Query.Direction.DESCENDING) // Order by timestamps in descending order to get the latest posts first
+            .orderBy(
+                "timestamps",
+                Query.Direction.DESCENDING
+            ) // Order by timestamps in descending order to get the latest posts first
             .limit(1) // Limit to 1 post to get the latest post
             .get()
             .addOnSuccessListener { documents ->
                 if (documents != null && !documents.isEmpty) {
-                    val latestPostDocument = documents.first() // Get the first document which is the latest post
-                    val imageUrl = latestPostDocument.getString("imageUrl") // Replace "imageUrl" with the field name containing the image URL
-                    val title = latestPostDocument.getString("judulBerita") ?: "" // Replace "judulBerita" with the field name containing the post title
+                    val latestPostDocument =
+                        documents.first() // Get the first document which is the latest post
+                    val imageUrl =
+                        latestPostDocument.getString("imageUrl") // Replace "imageUrl" with the field name containing the image URL
+                    val title = latestPostDocument.getString("judulBerita")
+                        ?: "" // Replace "judulBerita" with the field name containing the post title
                     val postId = latestPostDocument.id // Get the document ID
 
-                    // Bind the data to ImageView and TextView
+
                     Glide.with(requireContext())
                         .load(imageUrl)
-                        .into(binding.image) // Replace "imageView" with your ImageView's ID in your layout
-                    binding.textbanner.text = title // Replace "textViewTitle" with your TextView's ID in your layout
+                        .into(binding.image)
+                    binding.textbanner.text = title
 
-                    // Set onClickListener for cardViewLayout
                     binding.cardview.setOnClickListener {
                         val bundle = Bundle().apply {
                             putString("newsId", postId) // Pass postId to DetailFragment
@@ -146,16 +166,15 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
                             .commit()
                     }
                 } else {
-                    // Handle case when there are no posts
+
                     Log.d("HomeFragment", "No posts found.")
                 }
             }
             .addOnFailureListener { exception ->
-                // Handle the error
+
                 Log.e("HomeFragment", "Error fetching latest post: ", exception)
             }
     }
-
 
 
 }

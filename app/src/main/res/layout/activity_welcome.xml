@@ -12,10 +12,10 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:fillViewport="true"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -27,11 +27,11 @@
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
-                android:layout_gravity="center"
                 android:layout_height="wrap_content"
+                android:layout_gravity="center"
                 android:layout_marginStart="60dp"
-                android:layout_marginEnd="60dp"
                 android:layout_marginTop="20dp"
+                android:layout_marginEnd="60dp"
                 android:paddingBottom="10dp"
                 android:src="@drawable/welcome" />
 
@@ -40,51 +40,54 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="90dp"
-                android:paddingTop="20dp"
                 android:layout_marginEnd="90dp"
+                android:paddingTop="20dp"
                 android:src="@drawable/logoclicked" />
+
             <TextView
                 android:id="@+id/textView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textAlignment="center"
-                android:padding="10dp"
-                android:layout_marginTop="30dp"
-                android:layout_marginBottom="20dp"
-                android:textSize="21sp"
                 android:layout_marginStart="60dp"
+                android:layout_marginTop="30dp"
                 android:layout_marginEnd="60dp"
+                android:layout_marginBottom="20dp"
                 android:fontFamily="@font/intereb"
-                android:text="@string/Welcometext" />
+                android:padding="10dp"
+                android:text="@string/Welcometext"
+                android:textAlignment="center"
+                android:textSize="21sp" />
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 android:orientation="horizontal"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:layout_marginTop="20dp">
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
                 <Button
                     android:id="@+id/login"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/logintext"
-                    android:layout_weight="1"
                     android:layout_margin="20dp"
+                    android:layout_weight="1"
                     android:backgroundTint="@color/aquamarine"
-                    android:onClick="onButtonLoginClick" />
+                    android:onClick="onButtonLoginClick"
+                    android:text="@string/logintext" />
 
                 <Button
                     android:id="@+id/register"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="@string/registertext"
-                    android:backgroundTint="@color/aquamarine"
-                    android:layout_weight="1"
                     android:layout_margin="20dp"
-                    android:onClick="onButtonRegisterClick" />
+                    android:layout_weight="1"
+                    android:backgroundTint="@color/aquamarine"
+                    android:onClick="onButtonRegisterClick"
+                    android:text="@string/registertext" />
             </LinearLayout>
+
             <ImageView
                 android:id="@+id/imageView3"
                 android:layout_width="match_parent"
@@ -93,7 +96,7 @@
                 android:layout_marginEnd="70dp"
                 android:paddingTop="40dp"
                 android:paddingBottom="40dp"
-                android:src="@drawable/circle"/>
+                android:src="@drawable/circle" />
         </LinearLayout>
     </ScrollView>
 </androidx.constraintlayout.widget.ConstraintLayout>

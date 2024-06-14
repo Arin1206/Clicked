@@ -1,4 +1,5 @@
 package com.example.clicked.view.common
+
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -6,7 +7,6 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.viewbinding.ViewBinding
 
-//EXAMPLE USAGE class ExampleFragment : BaseFragment<FragmentExampleBinding>(FragmentExampleBinding::inflate)
 abstract class BaseFragment<VB : ViewBinding>(
     private val inflate: (layoutInflater: LayoutInflater, container: ViewGroup?, attachToRoot: Boolean) -> VB
 ) : Fragment() {
@@ -31,6 +31,7 @@ abstract class BaseFragment<VB : ViewBinding>(
         handleIntent()
         super.onResume()
     }
+
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null

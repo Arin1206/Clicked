@@ -7,12 +7,11 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_marginTop="4dp"
-    card_view:cardBackgroundColor="@color/gray"
-    card_view:strokeWidth="2dp"
     android:layout_marginBottom="6dp"
+    card_view:cardBackgroundColor="@color/gray"
     card_view:cardCornerRadius="12dp"
     card_view:strokeColor="@color/aquamarine"
-    >
+    card_view:strokeWidth="2dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -24,34 +23,35 @@
             android:layout_height="wrap_content"
             android:orientation="vertical"
             tools:ignore="MissingConstraints">
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
+
                 <TextView
                     android:id="@+id/judulposts"
-                    android:ellipsize="end"
-                    android:maxLines="2"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="10dp"
-                    android:paddingVertical="10dp"
                     android:layout_marginBottom="0dp"
+                    android:ellipsize="end"
+                    android:maxLines="2"
+                    android:paddingVertical="10dp"
                     android:textColor="@color/black"
                     android:textSize="20sp"
                     android:textStyle="bold"
                     card_view:layout_constraintEnd_toEndOf="parent"
+                    tools:ignore="MissingConstraints"
                     tools:layout_editor_absoluteY="2dp"
-                    tools:text="@string/judulposts"
-                    tools:ignore="MissingConstraints" />
+                    tools:text="@string/judulposts" />
             </LinearLayout>
 
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                >
+                android:orientation="horizontal">
 
                 <TextView
                     android:id="@+id/tanggalposts"
@@ -74,13 +74,13 @@
                     android:layout_gravity="end"
                     android:layout_marginRight="10dp"
                     android:layout_marginBottom="5dp"
-                    android:textSize="14dp"
                     android:background="@color/gray"
                     android:drawableStart="@drawable/baseline_arrow_forward_24"
-
                     android:drawableTint="@color/black"
+
                     android:textAlignment="textEnd"
                     android:textColor="@color/black"
+                    android:textSize="14dp"
                     android:textStyle="italic" />
             </LinearLayout>
         </LinearLayout>

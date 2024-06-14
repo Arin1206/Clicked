@@ -11,7 +11,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 
-class SplashActivity : AppCompatActivity() { // Use consistent naming
+class SplashActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -21,10 +21,9 @@ class SplashActivity : AppCompatActivity() { // Use consistent naming
             WindowManager.LayoutParams.FLAG_FULLSCREEN,
             WindowManager.LayoutParams.FLAG_FULLSCREEN
         )
-        val scope = CoroutineScope(Dispatchers.IO) // Launch coroutine in background
-
-        scope.launch { // Use coroutine for non-UI tasks
-            delay(3000L) // Delay for 3 seconds
+        val scope = CoroutineScope(Dispatchers.IO)
+        scope.launch {
+            delay(3000L)
             val intent = Intent(this@SplashActivity, WelcomeActivity::class.java)
             startActivity(intent)
             finish()

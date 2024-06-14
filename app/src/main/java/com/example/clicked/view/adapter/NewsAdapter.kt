@@ -8,8 +8,6 @@ import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.fragment.app.FragmentActivity
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment.Companion.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.example.clicked.R
@@ -17,7 +15,8 @@ import com.example.clicked.data.News
 import com.example.clicked.view.Update.UpdateFragment
 import com.example.clicked.view.detail.DetailFragment
 
-class NewsAdapter(private var newsList: List<News>) : RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
+class NewsAdapter(private var newsList: List<News>) :
+    RecyclerView.Adapter<NewsAdapter.NewsViewHolder>() {
 
     var onClickListener: View.OnClickListener? = null
     private lateinit var activity: FragmentActivity
@@ -40,7 +39,7 @@ class NewsAdapter(private var newsList: List<News>) : RecyclerView.Adapter<NewsA
             }
             activity.supportFragmentManager.beginTransaction()
                 .replace(R.id.frame, detailFragment)
-                .addToBackStack(null)  // Optional: untuk menambahkan transaksi ke back stack
+                .addToBackStack(null)
                 .commit()
         }
 
@@ -74,27 +73,19 @@ class NewsAdapter(private var newsList: List<News>) : RecyclerView.Adapter<NewsA
         private val editButton = itemView.findViewById<TextView>(R.id.buttonedit)
 
 
-
         fun bind(newsItem: News) {
             judulPosts.text = newsItem.title
             tanggalPosts.text = newsItem.date
             isiPosts.text = newsItem.paragraph
 
-            // Load image using Glide if imageUrl is not null
             newsItem.imageUrl?.let {
                 Glide.with(itemView.context)
                     .load(it)
                     .into(imgItemPhoto)
             }
-            // Set the news item ID as the tag of the editButton
-            // Set the news item ID as the tag of the editButton
             editButton.tag = newsItem.id
             editButton.setOnClickListener {
-                // Get the news item ID from the tag
                 val newsId = it.tag as String
-
-                // Show a toast with the news item ID
-                Toast.makeText(it.context, "News ID: $newsId", Toast.LENGTH_SHORT).show()
 
                 val bundle = Bundle().apply {
                     putString("newsId", newsId)

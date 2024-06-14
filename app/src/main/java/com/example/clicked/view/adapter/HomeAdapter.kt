@@ -12,7 +12,8 @@ import com.example.clicked.R
 import com.example.clicked.data.Post
 import com.example.clicked.view.detail.DetailFragment
 
-class HomeAdapter(private var posts: List<Post>, private val activity: FragmentActivity) : RecyclerView.Adapter<HomeAdapter.PostViewHolder>() {
+class HomeAdapter(private var posts: List<Post>, private val activity: FragmentActivity) :
+    RecyclerView.Adapter<HomeAdapter.PostViewHolder>() {
 
     class PostViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val judulPosts = itemView.findViewById<TextView>(R.id.judulposts)
@@ -39,7 +40,8 @@ class HomeAdapter(private var posts: List<Post>, private val activity: FragmentA
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.rv_posts_home, parent, false)
+        val view =
+            LayoutInflater.from(parent.context).inflate(R.layout.rv_posts_home, parent, false)
         return PostViewHolder(view)
     }
 

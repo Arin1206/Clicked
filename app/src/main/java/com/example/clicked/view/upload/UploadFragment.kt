@@ -44,20 +44,29 @@ class UploadFragment : BaseFragment<FragmentUploadBinding>(FragmentUploadBinding
     private var currentImageUri: Uri? = null
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
 
-    private val launcherIntentCamera = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            currentImageUri?.let { uri ->
-                Log.d(ContentValues.TAG, "Image Uri from camera: $uri")
-                binding.imagepreview.setImageURI(uri)
-            } ?: run {
-                Log.d(ContentValues.TAG, "Image Uri is null")
+    private val launcherIntentCamera =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                currentImageUri?.let { uri ->
+                    Log.d(ContentValues.TAG, "Image Uri from camera: $uri")
+                    binding.imagepreview.setImageURI(uri)
+                } ?: run {
+                    Log.d(ContentValues.TAG, "Image Uri is null")
+                }
             }
         }
-    }
 
     private fun getLocation() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION), REQUEST_LOCATION_PERMISSION)
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(),
+                arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+                REQUEST_LOCATION_PERMISSION
+            )
         } else {
             Log.d(ContentValues.TAG, "Permission already granted, getting location")
             fusedLocationClient.lastLocation
@@ -65,15 +74,27 @@ class UploadFragment : BaseFragment<FragmentUploadBinding>(FragmentUploadBinding
                     location?.let {
                         currentLat = it.latitude
                         currentLon = it.longitude
-                        Toast.makeText(requireContext(), "Latitude: $currentLat, Longitude: $currentLon", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Latitude: $currentLat, Longitude: $currentLon",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         Log.d(ContentValues.TAG, "Latitude: $currentLat, Longitude: $currentLon")
                     } ?: run {
-                        Toast.makeText(requireContext(), "Unable to retrieve location", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Unable to retrieve location",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         Log.d(ContentValues.TAG, "Location is null")
                     }
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(requireContext(), "Error getting location: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Error getting location: ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     Log.d(ContentValues.TAG, "Error getting location: ${e.message}")
                 }
         }
@@ -84,14 +105,19 @@ class UploadFragment : BaseFragment<FragmentUploadBinding>(FragmentUploadBinding
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         setupListeners()
 
-        // Request user location when the fragment opens
+
         getLocation()
     }
 
     private fun startCamera() {
         currentImageUri = getImageUri()
         currentImageUri?.let {
-            launcherIntentCamera.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, it))
+            launcherIntentCamera.launch(
+                Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(
+                    MediaStore.EXTRA_OUTPUT,
+                    it
+                )
+            )
         }
     }
 
@@ -101,7 +127,11 @@ class UploadFragment : BaseFragment<FragmentUploadBinding>(FragmentUploadBinding
         val storageDir = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         val image = File.createTempFile(imageFileName, ".jpg", storageDir)
         currentImagePath = image.absolutePath
-        return FileProvider.getUriForFile(requireContext(), "${requireContext().packageName}.fileprovider", image)
+        return FileProvider.getUriForFile(
+            requireContext(),
+            "${requireContext().packageName}.fileprovider",
+            image
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -119,35 +149,35 @@ class UploadFragment : BaseFragment<FragmentUploadBinding>(FragmentUploadBinding
     }
 
     override fun setupUI() {
-        // Initialize the Spinner
+
         val mySpinner = binding.mySpinner
 
-        // Create an ArrayAdapter using the string array and a default spinner layout
+
         val adapter = ArrayAdapter.createFromResource(
             requireContext(),
             R.array.spinner_items,
             android.R.layout.simple_spinner_item
         )
 
-        // Specify the layout to use when the list of choices appears
+
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
 
-        // Apply the adapter to the spinner
+
         mySpinner.adapter = adapter
     }
 
     override fun setupListeners() {
-        // Setup listener for image preview click
+
         binding.camera.setOnClickListener {
             startCamera()
         }
 
-        // Setup listener for gallery button
+
         binding.gallery.setOnClickListener {
             openGallery()
         }
 
-        // Setup listener for save button
+
         binding.saveButton.setOnClickListener {
             saveData()
         }
@@ -162,7 +192,7 @@ class UploadFragment : BaseFragment<FragmentUploadBinding>(FragmentUploadBinding
     ) { uri: Uri? ->
         if (uri != null) {
             currentImageUri = uri
-            showImage() // Panggil fungsi showImage() di sini untuk menampilkan gambar yang dipilih
+            showImage()
         } else {
             Log.d("Photo Picker", "No media selected")
         }
@@ -182,40 +212,77 @@ class UploadFragment : BaseFragment<FragmentUploadBinding>(FragmentUploadBinding
         val paragraf3 = binding.paragraf3.text.toString().trim()
         val spinnerItem = binding.mySpinner.selectedItem.toString()
         val includePosition = binding.includePositionCheckBox.isChecked
-        val currentTimeMillis = System.currentTimeMillis() // Mendapatkan waktu saat ini
+        val currentTimeMillis = System.currentTimeMillis()
 
-        // Validate required fields
+
         if (currentImageUri == null || judulBerita.isEmpty() || paragraf1.isEmpty()) {
-            Toast.makeText(requireContext(), "Please fill in all required fields", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                "Please fill in all required fields",
+                Toast.LENGTH_SHORT
+            ).show()
             return
         }
 
-        // Upload image to Firebase Storage
+
         currentImageUri?.let { uri ->
-            val storageRef = FirebaseStorage.getInstance().reference.child("images/${uri.lastPathSegment}")
+            val storageRef =
+                FirebaseStorage.getInstance().reference.child("images/${uri.lastPathSegment}")
             storageRef.putFile(uri)
                 .addOnSuccessListener {
                     storageRef.downloadUrl.addOnSuccessListener { downloadUrl ->
                         val userId = auth.currentUser?.uid
                         if (userId != null) {
-                            val formattedDate = SimpleDateFormat("d MMMM yyyy", Locale.getDefault()).format(currentTimeMillis)
-                            saveToFirestore(userId, downloadUrl.toString(), judulBerita, paragraf1, paragraf2, paragraf3, spinnerItem, includePosition, currentTimeMillis) // Menyimpan waktu saat ini bersama data berita
+                            val formattedDate =
+                                SimpleDateFormat("d MMMM yyyy", Locale.getDefault()).format(
+                                    currentTimeMillis
+                                )
+                            saveToFirestore(
+                                userId,
+                                downloadUrl.toString(),
+                                judulBerita,
+                                paragraf1,
+                                paragraf2,
+                                paragraf3,
+                                spinnerItem,
+                                includePosition,
+                                currentTimeMillis
+                            )
                         } else {
-                            Toast.makeText(requireContext(), "User ID not found", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireContext(),
+                                "User ID not found",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(requireContext(), "Error uploading image: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Error uploading image: ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     Log.d(ContentValues.TAG, "Error uploading image: ${e.message}")
                 }
         }
     }
 
 
-    private fun saveToFirestore(userId: String, imageUrl: String, judulBerita: String, paragraf1: String, paragraf2: String, paragraf3: String, spinnerItem: String, includePosition: Boolean, currentTimeMillis: Long) {
+    private fun saveToFirestore(
+        userId: String,
+        imageUrl: String,
+        judulBerita: String,
+        paragraf1: String,
+        paragraf2: String,
+        paragraf3: String,
+        spinnerItem: String,
+        includePosition: Boolean,
+        currentTimeMillis: Long
+    ) {
         binding.loadingProgressBar.visibility = View.VISIBLE
-        val formattedDate = SimpleDateFormat("d MMMM yyyy", Locale.getDefault()).format(currentTimeMillis)
+        val formattedDate =
+            SimpleDateFormat("d MMMM yyyy", Locale.getDefault()).format(currentTimeMillis)
 
         val newsData = hashMapOf(
             "userId" to userId,
@@ -226,8 +293,8 @@ class UploadFragment : BaseFragment<FragmentUploadBinding>(FragmentUploadBinding
             "paragraf3" to paragraf3,
             "spinnerItem" to spinnerItem,
             "includePosition" to includePosition,
-            "timestamp" to FieldValue.serverTimestamp(), // Menambahkan waktu saat ini ke data berita
-            "formattedDate" to formattedDate // Menambahkan tanggal yang diformat ke data berita
+            "timestamp" to FieldValue.serverTimestamp(),
+            "formattedDate" to formattedDate
         )
 
         if (includePosition) {
@@ -238,37 +305,48 @@ class UploadFragment : BaseFragment<FragmentUploadBinding>(FragmentUploadBinding
         FirebaseFirestore.getInstance().collection("news")
             .add(newsData)
             .addOnSuccessListener {
-                Toast.makeText(requireContext(), "News saved successfully", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "News saved successfully", Toast.LENGTH_SHORT)
+                    .show()
                 Log.d(ContentValues.TAG, "News saved successfully")
                 binding.loadingProgressBar.visibility = View.GONE
                 val profileFragment = ProfileFragment()
-                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame, profileFragment)
+                activity?.supportFragmentManager?.beginTransaction()
+                    ?.replace(R.id.frame, profileFragment)
                     ?.addToBackStack(null)?.commit()
             }
             .addOnFailureListener { e ->
-                Toast.makeText(requireContext(), "Error saving news: ${e.message}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(
+                    requireContext(),
+                    "Error saving news: ${e.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
                 Log.d(ContentValues.TAG, "Error saving news: ${e.message}")
                 binding.loadingProgressBar.visibility = View.GONE
             }
     }
 
 
-
     override fun setupObservers() {
-// Set up any observers here
+
     }
-        override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
-            super.onRequestPermissionsResult(requestCode, permissions, grantResults)
-            if (requestCode == REQUEST_LOCATION_PERMISSION) {
-                if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    getLocation()
-                } else {
-                    Toast.makeText(requireContext(), "Location permission denied", Toast.LENGTH_SHORT).show()
-                }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        if (requestCode == REQUEST_LOCATION_PERMISSION) {
+            if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                getLocation()
+            } else {
+                Toast.makeText(requireContext(), "Location permission denied", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
-
-        companion object {
-            private const val REQUEST_LOCATION_PERMISSION = 100
-        }
     }
+
+    companion object {
+        private const val REQUEST_LOCATION_PERMISSION = 100
+    }
+}

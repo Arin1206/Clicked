@@ -26,7 +26,6 @@ import com.example.clicked.databinding.FragmentUpdateBinding
 import com.example.clicked.view.common.BaseFragment
 import com.example.clicked.view.main.MainActivity
 import com.example.clicked.view.profile.ProfileFragment
-import com.example.clicked.view.upload.UploadFragment
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.google.firebase.auth.FirebaseAuth
@@ -37,9 +36,9 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.Date
 
-class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding::inflate)  {
+class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding::inflate) {
 
-    private val REQUEST_IMAGE_CAPTURE = 101
+
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private var currentLat: Double = 0.0
     private var currentLon: Double = 0.0
@@ -48,15 +47,16 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding
     private var currentImageUri: Uri? = null
     private val auth: FirebaseAuth by lazy { FirebaseAuth.getInstance() }
     private lateinit var newsId: String
-    private lateinit var spinnerItems: Array<String> // Properti untuk menyimpan daftar pilihan spinner
+    private lateinit var spinnerItems: Array<String>
     override fun setupUI() {
         arguments?.let {
             newsId = it.getString("newsId") ?: ""
             fetchNewsDetails(newsId)
         }
         spinnerItems = resources.getStringArray(R.array.spinner_items)
-        // Mendapatkan daftar pilihan spinner dari properti spinnerItems
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerItems)
+
+        val adapter =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, spinnerItems)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.mySpinneredit.adapter = adapter
     }
@@ -70,7 +70,7 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding
             startCamera()
         }
 
-        // Setup listener for gallery button
+
         binding.gallery.setOnClickListener {
             openGallery()
         }
@@ -79,16 +79,26 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding
     private fun startCamera() {
         currentImageUri = getImageUri()
         currentImageUri?.let {
-            launcherIntentCamera.launch(Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(MediaStore.EXTRA_OUTPUT, it))
+            launcherIntentCamera.launch(
+                Intent(MediaStore.ACTION_IMAGE_CAPTURE).putExtra(
+                    MediaStore.EXTRA_OUTPUT,
+                    it
+                )
+            )
         }
     }
+
     private fun getImageUri(): Uri {
         val timestamp = System.currentTimeMillis() / 1000
         val imageFileName = "JPEG_" + timestamp.toString() + "_"
         val storageDir = requireContext().getExternalFilesDir(Environment.DIRECTORY_PICTURES)
         val image = File.createTempFile(imageFileName, ".jpg", storageDir)
         currentImagePath = image.absolutePath
-        return FileProvider.getUriForFile(requireContext(), "${requireContext().packageName}.fileprovider", image)
+        return FileProvider.getUriForFile(
+            requireContext(),
+            "${requireContext().packageName}.fileprovider",
+            image
+        )
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -114,7 +124,7 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding
     ) { uri: Uri? ->
         if (uri != null) {
             currentImageUri = uri
-            showImage() // Panggil fungsi showImage() di sini untuk menampilkan gambar yang dipilih
+            showImage()
         } else {
             Log.d("Photo Picker", "No media selected")
         }
@@ -126,15 +136,18 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding
         setupListeners()
 
         (activity as? MainActivity)?.binding?.bottomnavigation?.visibility = View.GONE
-        // Request user location when the fragment opens
+
         getLocation()
 
-        requireActivity().onBackPressedDispatcher.addCallback(viewLifecycleOwner, object : OnBackPressedCallback(true) {
-            override fun handleOnBackPressed() {
-                (activity as? MainActivity)?.binding?.bottomnavigation?.visibility = View.VISIBLE
-                activity?.supportFragmentManager?.popBackStack()
-            }
-        })
+        requireActivity().onBackPressedDispatcher.addCallback(
+            viewLifecycleOwner,
+            object : OnBackPressedCallback(true) {
+                override fun handleOnBackPressed() {
+                    (activity as? MainActivity)?.binding?.bottomnavigation?.visibility =
+                        View.VISIBLE
+                    activity?.supportFragmentManager?.popBackStack()
+                }
+            })
 
     }
 
@@ -144,29 +157,29 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding
 
         newsRef.get().addOnSuccessListener { document ->
             if (document != null && document.exists()) {
-                // Ikatan elemen UI dengan variabel Kotlin
+
                 binding.judulberitaedit.setText(document.getString("judulBerita"))
                 binding.paragraf1edit.setText(document.getString("paragraf1"))
                 binding.paragraf2edit.setText(document.getString("paragraf2"))
                 binding.paragraf3edit.setText(document.getString("paragraf3"))
 
-                // Set nilai spinner sesuai data dari Firestore
+
                 val spinnerItem = document.getString("spinnerItem") ?: ""
                 val spinnerPosition = spinnerItems.indexOf(spinnerItem)
                 if (spinnerPosition != -1) {
                     binding.mySpinneredit.setSelection(spinnerPosition)
                 }
 
-                // Binding checkbox
+
                 val includePosition = document.getBoolean("includePosition") ?: false
                 binding.includePositionCheckBoxedit.isChecked = includePosition
-                // Binding image preview
+
                 val imageUrl = document.getString("imageUrl") ?: ""
-                // Load image using Glide or your preferred method
+
                 Glide.with(this).load(imageUrl).into(binding.imagepreviewedit)
             }
         }.addOnFailureListener { exception ->
-            // Handle any errors
+
         }
     }
 
@@ -184,7 +197,7 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding
 
         val userId = auth.currentUser?.uid ?: ""
 
-        // Fetch the existing image URL from Firestore
+
         newsRef.get().addOnSuccessListener { document ->
             val existingImageUrl = document.getString("imageUrl") ?: ""
 
@@ -212,8 +225,9 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding
             )
 
             if (currentImageUri != null) {
-                // Upload new image to Firebase Storage
-                val storageRef = FirebaseStorage.getInstance().reference.child("images/${System.currentTimeMillis()}_image.jpg")
+
+                val storageRef =
+                    FirebaseStorage.getInstance().reference.child("images/${System.currentTimeMillis()}_image.jpg")
                 val uploadTask = storageRef.putFile(currentImageUri!!)
 
                 uploadTask.addOnSuccessListener { taskSnapshot ->
@@ -221,56 +235,85 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding
                         val newImageUrl = uri.toString()
                         updatedNews["imageUrl"] = newImageUrl
 
-                        // Update Firestore with the new news details including the new image URL
+
                         newsRef.set(updatedNews).addOnSuccessListener {
                             binding.loadingProgressBar.visibility = View.GONE
-                            Toast.makeText(requireContext(), "News details saved successfully", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireContext(),
+                                "News details saved successfully",
+                                Toast.LENGTH_SHORT
+                            ).show()
                             val profileFragment = ProfileFragment()
-                            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame, profileFragment)
+                            activity?.supportFragmentManager?.beginTransaction()
+                                ?.replace(R.id.frame, profileFragment)
                                 ?.addToBackStack(null)?.commit()
                         }.addOnFailureListener { exception ->
                             binding.loadingProgressBar.visibility = View.GONE
-                            Toast.makeText(requireContext(), "Failed to save news details", Toast.LENGTH_SHORT).show()
+                            Toast.makeText(
+                                requireContext(),
+                                "Failed to save news details",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     }
                 }.addOnFailureListener { exception ->
                     binding.loadingProgressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), "Failed to upload image", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Failed to upload image", Toast.LENGTH_SHORT)
+                        .show()
                 }
             } else {
-                // No new image to upload, just update Firestore with existing image URL
+
                 newsRef.set(updatedNews).addOnSuccessListener {
                     binding.loadingProgressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), "News details saved successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "News details saved successfully",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     val profileFragment = ProfileFragment()
-                    activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.frame, profileFragment)
+                    activity?.supportFragmentManager?.beginTransaction()
+                        ?.replace(R.id.frame, profileFragment)
                         ?.addToBackStack(null)?.commit()
                 }.addOnFailureListener { exception ->
                     binding.loadingProgressBar.visibility = View.GONE
-                    Toast.makeText(requireContext(), "Failed to save news details", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Failed to save news details",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
         }.addOnFailureListener { exception ->
             binding.loadingProgressBar.visibility = View.GONE
-            Toast.makeText(requireContext(), "Failed to fetch existing image URL", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                requireContext(),
+                "Failed to fetch existing image URL",
+                Toast.LENGTH_SHORT
+            ).show()
         }
     }
 
 
-    private val launcherIntentCamera = registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
-        if (result.resultCode == Activity.RESULT_OK) {
-            currentImageUri?.let { uri ->
-                Log.d(ContentValues.TAG, "Image Uri from camera: $uri")
-                binding.imagepreviewedit.setImageURI(uri)
-            } ?: run {
-                Log.d(ContentValues.TAG, "Image Uri is null")
+    private val launcherIntentCamera =
+        registerForActivityResult(ActivityResultContracts.StartActivityForResult()) { result ->
+            if (result.resultCode == Activity.RESULT_OK) {
+                currentImageUri?.let { uri ->
+                    Log.d(ContentValues.TAG, "Image Uri from camera: $uri")
+                    binding.imagepreviewedit.setImageURI(uri)
+                } ?: run {
+                    Log.d(ContentValues.TAG, "Image Uri is null")
+                }
             }
         }
-    }
 
     private fun getLocation() {
-        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
-            ActivityCompat.requestPermissions(requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
+        if (ContextCompat.checkSelfPermission(
+                requireContext(),
+                Manifest.permission.ACCESS_FINE_LOCATION
+            ) != PackageManager.PERMISSION_GRANTED
+        ) {
+            ActivityCompat.requestPermissions(
+                requireActivity(), arrayOf(Manifest.permission.ACCESS_FINE_LOCATION),
                 UpdateFragment.REQUEST_LOCATION_PERMISSION
             )
         } else {
@@ -280,15 +323,27 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding
                     location?.let {
                         currentLat = it.latitude
                         currentLon = it.longitude
-                        Toast.makeText(requireContext(), "Latitude: $currentLat, Longitude: $currentLon", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Latitude: $currentLat, Longitude: $currentLon",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         Log.d(ContentValues.TAG, "Latitude: $currentLat, Longitude: $currentLon")
                     } ?: run {
-                        Toast.makeText(requireContext(), "Unable to retrieve location", Toast.LENGTH_SHORT).show()
+                        Toast.makeText(
+                            requireContext(),
+                            "Unable to retrieve location",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         Log.d(ContentValues.TAG, "Location is null")
                     }
                 }
                 .addOnFailureListener { e ->
-                    Toast.makeText(requireContext(), "Error getting location: ${e.message}", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Error getting location: ${e.message}",
+                        Toast.LENGTH_SHORT
+                    ).show()
                     Log.d(ContentValues.TAG, "Error getting location: ${e.message}")
                 }
         }
@@ -299,21 +354,28 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding
             binding.imagepreviewedit.setImageURI(uri)
         }
     }
+
     override fun setupObservers() {
 
 
-
     }
-    override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults)
         if (requestCode == REQUEST_LOCATION_PERMISSION) {
             if (grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                 getLocation()
             } else {
-                Toast.makeText(requireContext(), "Location permission denied", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "Location permission denied", Toast.LENGTH_SHORT)
+                    .show()
             }
         }
     }
+
     companion object {
         private const val REQUEST_LOCATION_PERMISSION = 100
     }

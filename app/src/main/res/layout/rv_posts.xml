@@ -7,10 +7,10 @@
     android:layout_height="wrap_content"
     android:layout_gravity="center"
     android:layout_marginTop="4dp"
-    card_view:cardBackgroundColor="@color/blue_dark"
-    card_view:strokeWidth="0dp"
     android:layout_marginBottom="6dp"
-    card_view:cardCornerRadius="12dp">
+    card_view:cardBackgroundColor="@color/blue_dark"
+    card_view:cardCornerRadius="12dp"
+    card_view:strokeWidth="0dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -33,29 +33,29 @@
             android:id="@+id/buttonedit"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="18dp"
             android:background="@color/aquamarine"
+            android:gravity="start"
+            android:padding="2dp"
             android:text="@string/textedit"
             android:textSize="10sp"
-            android:padding="2dp"
-            android:layout_marginLeft="18dp"
-            android:gravity="start"
+            card_view:layout_constraintBottom_toTopOf="@+id/judulposts"
             card_view:layout_constraintStart_toEndOf="@+id/img_item_photo"
-            card_view:layout_constraintTop_toTopOf="parent"
-            card_view:layout_constraintBottom_toTopOf="@+id/judulposts"/>
+            card_view:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/judulposts"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="12dp"
+            android:layout_marginEnd="8dp"
             android:textColor="@color/white"
             android:textSize="12sp"
             android:textStyle="bold"
+            card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toEndOf="@+id/img_item_photo"
             card_view:layout_constraintTop_toBottomOf="@+id/buttonedit"
-            card_view:layout_constraintEnd_toEndOf="parent"
             tools:text="@string/judulposts" />
 
         <TextView
@@ -63,14 +63,14 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
             android:textColor="@color/gray2"
             android:textSize="12sp"
             android:textStyle="italic"
+            card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toEndOf="@+id/img_item_photo"
             card_view:layout_constraintTop_toBottomOf="@+id/judulposts"
-            card_view:layout_constraintEnd_toEndOf="parent"
             tools:text="@string/tanggalposts" />
 
         <TextView
@@ -78,16 +78,16 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="18dp"
-            android:layout_marginEnd="8dp"
             android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
             android:ellipsize="end"
             android:maxLines="3"
             android:textColor="@color/gray2"
             android:textSize="12sp"
+            card_view:layout_constraintBottom_toBottomOf="parent"
+            card_view:layout_constraintEnd_toEndOf="parent"
             card_view:layout_constraintStart_toEndOf="@+id/img_item_photo"
             card_view:layout_constraintTop_toBottomOf="@+id/tanggalposts"
-            card_view:layout_constraintEnd_toEndOf="parent"
-            card_view:layout_constraintBottom_toBottomOf="parent"
             tools:text="@string/isiposts" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>

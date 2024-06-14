@@ -20,7 +20,7 @@ class WelcomeActivity : AppCompatActivity() {
         enableEdgeToEdge()
         setContentView(R.layout.activity_welcome)
 
-        // Initialize Firebase Auth
+
         firebaseAuth = FirebaseAuth.getInstance()
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
@@ -29,11 +29,11 @@ class WelcomeActivity : AppCompatActivity() {
             insets
         }
 
-        // Check if user is logged in
+
         if (firebaseAuth.currentUser != null) {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
-            finish() // Ensure the WelcomeActivity is closed
+            finish()
         }
     }
 

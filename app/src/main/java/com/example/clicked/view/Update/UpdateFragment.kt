@@ -219,7 +219,7 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding
                 "latitude" to latitude,
                 "longitude" to longitude,
                 "formattedDate" to currentDate,
-                "timestamps" to FieldValue.serverTimestamp(),
+                "timestamp" to FieldValue.serverTimestamp(),
                 "imageUrl" to imageUrl,
                 "userId" to userId
             )

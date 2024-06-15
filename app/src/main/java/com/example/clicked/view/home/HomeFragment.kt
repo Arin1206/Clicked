@@ -144,7 +144,7 @@ private fun shareNews() {
 
         firestore.collection("news")
             .orderBy(
-                "timestamps",
+                "timestamp",
                 Query.Direction.DESCENDING
             ) // Order by timestamps in descending order to get the latest posts first
             .limit(1) // Limit to 1 post to get the latest post

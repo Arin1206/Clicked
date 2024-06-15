@@ -3,7 +3,6 @@ package com.example.clicked.view.setting
 import android.app.AlertDialog
 import android.content.ContentValues.TAG
 import android.content.Intent
-import android.provider.Settings
 import android.util.Log
 import android.view.View
 import com.bumptech.glide.Glide
@@ -26,10 +25,6 @@ class SettingFragment : BaseFragment<FragmentSettingBinding>(FragmentSettingBind
     override fun setupListeners() {
         binding.submitlogout.setOnClickListener {
             showLogoutConfirmationDialog()
-        }
-        binding.submitlanguage.setOnClickListener{
-            startActivity(Intent(Settings.ACTION_LOCALE_SETTINGS))
-            true
         }
 
     }

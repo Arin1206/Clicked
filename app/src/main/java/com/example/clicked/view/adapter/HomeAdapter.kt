@@ -1,6 +1,7 @@
 package com.example.clicked.view.adapter
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -38,6 +39,7 @@ class HomeAdapter(private var posts: List<Post>, private val activity: FragmentA
             }
         }
     }
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PostViewHolder {
         val view =

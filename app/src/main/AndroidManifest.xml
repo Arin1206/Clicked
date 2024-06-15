@@ -38,7 +38,8 @@
 
         <activity
             android:name=".view.main.MainActivity"
-            android:exported="false" />
+            android:exported="false"
+            android:configChanges="locale" />
         <activity
             android:name=".view.register.RegisterActivity"
             android:exported="false" />

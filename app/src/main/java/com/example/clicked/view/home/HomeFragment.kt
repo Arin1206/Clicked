@@ -10,15 +10,18 @@ import com.bumptech.glide.Glide
 import com.example.clicked.R
 import com.example.clicked.data.Post
 import com.example.clicked.databinding.FragmentHomeBinding
+import com.example.clicked.view.LocaleListener
 import com.example.clicked.view.adapter.HomeAdapter
 import com.example.clicked.view.common.BaseFragment
 import com.example.clicked.view.detail.DetailFragment
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Query
+import java.util.Locale
 import java.util.Timer
 import java.util.TimerTask
 
-class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate),
+    LocaleListener {
 
     private lateinit var firestore: FirebaseFirestore
 
@@ -38,8 +41,17 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             shareNews()
         }
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        setLocale(Locale.getDefault().language)
+    }
 
-    private fun shareNews() {
+    override fun setLocale(language: String) {
+        // Implementasi logika setLocale di sini
+        Log.d("HomeFragment", "Locale changed to $language")
+    }
+
+private fun shareNews() {
         val title = binding.textbanner.text.toString()
 
         val shareText = "Check out this news:\n$title\n"
@@ -139,6 +151,7 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::infl
             .get()
             .addOnSuccessListener { documents ->
                 if (documents != null && !documents.isEmpty) {
+                    setLocale(Locale.getDefault().language)
                     val latestPostDocument =
                         documents.first() // Get the first document which is the latest post
                     val imageUrl =

@@ -67,9 +67,15 @@ class NewsAdapter(private var newsList: List<News>) :
 
     inner class NewsViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val imgItemPhoto = itemView.findViewById<ImageView>(R.id.img_item_photo)
-        private val judulPosts = itemView.findViewById<TextView>(R.id.judulposts)
-        private val tanggalPosts = itemView.findViewById<TextView>(R.id.tanggalposts)
-        private val isiPosts = itemView.findViewById<TextView>(R.id.isiposts)
+        private val judulPosts = itemView.findViewById<TextView>(R.id.judulposts).apply {
+            text = itemView.context.getString(R.string.judulposts)
+        }
+        private val tanggalPosts = itemView.findViewById<TextView>(R.id.tanggalposts).apply {
+            text = itemView.context.getString(R.string.tanggalposts)
+        }
+        private val isiPosts = itemView.findViewById<TextView>(R.id.isiposts).apply {
+            text = itemView.context.getString(R.string.isiposts)
+        }
         private val editButton = itemView.findViewById<TextView>(R.id.buttonedit)
 
 

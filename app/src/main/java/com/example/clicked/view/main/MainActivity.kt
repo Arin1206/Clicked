@@ -73,6 +73,14 @@ class MainActivity : AppCompatActivity() {
         fragmentTransaction.commit()
     }
 
+    override fun onBackPressed() {
+        val currentFragment = supportFragmentManager.findFragmentById(R.id.frame)
+        if (currentFragment is HomeFragment) {
+            finish()
+        } else {
+            super.onBackPressed()
+        }
+    }
 
 
 }

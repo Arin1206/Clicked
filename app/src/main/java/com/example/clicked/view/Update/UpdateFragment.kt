@@ -135,20 +135,16 @@ class UpdateFragment : BaseFragment<FragmentUpdateBinding>(FragmentUpdateBinding
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireActivity())
         setupListeners()
 
-        (activity as? MainActivity)?.binding?.bottomnavigation?.visibility = View.GONE
 
         getLocation()
+        (activity as? MainActivity)?.binding?.bottomnavigation?.visibility = View.GONE
 
-        requireActivity().onBackPressedDispatcher.addCallback(
-            viewLifecycleOwner,
-            object : OnBackPressedCallback(true) {
-                override fun handleOnBackPressed() {
-                    (activity as? MainActivity)?.binding?.bottomnavigation?.visibility =
-                        View.VISIBLE
-                    activity?.supportFragmentManager?.popBackStack()
-                }
-            })
+    }
 
+    override fun onDestroyView() {
+        super.onDestroyView()
+
+        (activity as? MainActivity)?.binding?.bottomnavigation?.visibility = View.VISIBLE
     }
 
     private fun fetchNewsDetails(newsId: String) {

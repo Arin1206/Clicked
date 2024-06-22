@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:background="@drawable/dialog_background"
+    android:padding="20dp">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Delete News"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        android:gravity="center"
+        android:paddingBottom="10dp"
+        android:textColor="@android:color/black"/>
+
+    <TextView
+        android:id="@+id/dialog_message"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Are you sure you want to delete this news?"
+        android:textSize="16sp"
+        android:gravity="center"
+        android:textColor="@android:color/black"
+        android:paddingBottom="20dp"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <Button
+            android:id="@+id/dialog_button_yes"
+            android:layout_width="wrap_content"
+            android:backgroundTint="@color/aquamarine_trans"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="Yes"
+            android:layout_marginEnd="10dp"/>
+
+        <Button
+            android:id="@+id/dialog_button_no"
+            android:layout_width="wrap_content"
+            android:backgroundTint="@color/aquamarine_trans"
+            android:layout_height="wrap_content"
+            android:textColor="@color/black"
+            android:text="No"/>
+
+    </LinearLayout>
+</LinearLayout>

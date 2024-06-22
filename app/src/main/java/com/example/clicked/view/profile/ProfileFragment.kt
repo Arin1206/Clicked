@@ -5,10 +5,13 @@ import android.content.ContentValues
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.Button
+import android.widget.TextView
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
+import com.example.clicked.R
 import com.example.clicked.data.News
 import com.example.clicked.databinding.FragmentProfileBinding
 import com.example.clicked.view.adapter.NewsAdapter
@@ -44,22 +47,28 @@ class ProfileFragment : BaseFragment<FragmentProfileBinding>(FragmentProfileBind
                 val position = viewHolder.adapterPosition
                 val newsItem = adapter.getNewsAtPosition(position)
 
-
-                AlertDialog.Builder(requireContext())
-                    .setTitle("Delete News")
-                    .setMessage("Are you sure you want to delete this news?")
-                    .setPositiveButton("Yes") { dialog, _ ->
-                        deleteNewsFromFirestore(newsItem)
-                        adapter.removeNewsAtPosition(position)
-                        dialog.dismiss()
-                    }
-                    .setNegativeButton("No") { dialog, _ ->
-                        adapter.notifyItemChanged(position)
-                        dialog.dismiss()
-                    }
+                val customDialogView = layoutInflater.inflate(R.layout.custom_dialog, null)
+                val dialog = AlertDialog.Builder(requireContext(), R.style.CustomDialogTheme)
+                    .setView(customDialogView)
                     .create()
-                    .show()
+
+                customDialogView.findViewById<TextView>(R.id.dialog_title).text = "Delete News"
+                customDialogView.findViewById<TextView>(R.id.dialog_message).text = "Are you sure you want to delete this news?"
+
+                customDialogView.findViewById<Button>(R.id.dialog_button_yes).setOnClickListener {
+                    deleteNewsFromFirestore(newsItem)
+                    adapter.removeNewsAtPosition(position)
+                    dialog.dismiss()
+                }
+
+                customDialogView.findViewById<Button>(R.id.dialog_button_no).setOnClickListener {
+                    adapter.notifyItemChanged(position)
+                    dialog.dismiss()
+                }
+
+                dialog.show()
             }
+
         })
         itemTouchHelper.attachToRecyclerView(recyclerView)
     }
